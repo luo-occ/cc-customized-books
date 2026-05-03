@@ -25,7 +25,7 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(names["en"], "ch01-en.xhtml")
         self.assertEqual(names["recap"], "ch01-recap.xhtml")
 
-    def test_render_book_companion_uses_labels_not_raw_urls(self):
+    def test_render_book_companion_omits_reference_section_from_listening_epub(self):
         companion = BookCompanion(
             companion_zh="中文导读",
             summary_en="English guide.",
@@ -41,7 +41,9 @@ class RenderTests(unittest.TestCase):
 
         self.assertIn("Book Companion", rendered)
         self.assertIn("中文导读", rendered)
-        self.assertIn("Publisher page", rendered)
+        self.assertIn("English Summary", rendered)
+        self.assertNotIn("References For Visual Review", rendered)
+        self.assertNotIn("Publisher page", rendered)
         self.assertNotIn("https://example.com/publisher", rendered)
 
     def test_render_chapter_pages_has_expected_titles(self):

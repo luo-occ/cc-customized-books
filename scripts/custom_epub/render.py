@@ -47,11 +47,6 @@ def paragraphs(text: str) -> str:
 
 
 def render_book_companion(title: str, companion: BookCompanion) -> str:
-    references = "".join(
-        f"<li>{html.escape(reference.get('label', ''))}</li>"
-        for reference in companion.references
-        if reference.get("label")
-    )
     return html_page(
         "Book Companion",
         f"""
@@ -60,8 +55,6 @@ def render_book_companion(title: str, companion: BookCompanion) -> str:
 {paragraphs(companion.companion_zh)}
 <h2>English Summary</h2>
 <div class="english-summary"><p>{html.escape(companion.summary_en)}</p></div>
-<h2>References For Visual Review</h2>
-<ul>{references}</ul>
 """,
     )
 
