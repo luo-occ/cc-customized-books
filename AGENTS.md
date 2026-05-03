@@ -93,3 +93,107 @@ Before merging, create a pairing map with:
 If source editions differ, do not silently skip material. Explain frontmatter, epilogues, notes, appendices, acknowledgments, photographs, maps, indexes, and image-heavy sections. Decide whether each should be included, summarized, converted, or flagged.
 
 Pause and ask the user only when the mismatch changes the reading experience in a meaningful way and cannot be resolved from the sources.
+
+## Book-Level Companion Standards
+
+The book-level companion should be substantial and bilingual. Put the main explanation in Chinese first, then add a concise English summary.
+
+Include:
+
+- What the book is about.
+- Why the book matters.
+- Author background and writing context.
+- Historical, cultural, political, technical, or intellectual context.
+- Major themes and tensions.
+- Controversies, criticism, or competing interpretations where relevant.
+- Community agreement or disagreement for technical and idea-driven books.
+- A reading strategy tailored to the user.
+- An optional reading schedule when the book benefits from pacing.
+- Parts worth reading closely.
+- Parts that can be skimmed.
+- References and further reading with human-readable source labels.
+
+Outside research is recommended by default for the book-level companion, especially for biography, history, politics, culture, technology, and idea-driven nonfiction. For modern facts, current public figures, laws, products, software, or community consensus, verify with up-to-date sources.
+
+Do not expose raw web URLs in listener-facing text. Use labels such as `publisher page`, `author interview`, `New York Times review`, or `official documentation`. Raw URLs may exist only as hidden hyperlink targets or in a clearly marked optional visual-only reference section.
+
+## Chapter Companion Standards
+
+Each chapter begins with a concise listening brief and then deeper companion notes before the Chinese chapter.
+
+The listening brief should be short and audio-friendly. Include:
+
+- What to listen for.
+- Key names and pronunciation hints.
+- Two to four important ideas.
+- Context needed before hearing the chapter.
+
+The deeper companion reference should include Chinese explanation first and concise English summary second. Cover:
+
+- What happens, or what the chapter argues.
+- Why the chapter matters in the whole book.
+- Context that helps comprehension.
+- Key people, places, ideas, terms, or events.
+- Reading priority: read closely or skim lightly.
+- Difficult cultural references or disputed claims when relevant.
+
+Mark long background explanations, detailed source notes, and dense references as optional or visual-reference material when they would interrupt listening flow.
+
+## Vocabulary For Listening
+
+Create a learning-priority vocabulary section immediately before each English chapter.
+
+Use these groups:
+
+- Must know.
+- Useful / high-value.
+- Specialized or context-bound.
+
+Select vocabulary from:
+
+- Words in `glossary/english_words.txt` that appear in the chapter.
+- Likely blockers for an upper-B2/lower-C1 reader.
+- High-value phrases, idioms, collocations, and specialist terms.
+
+Write entries as readable mini-explanations instead of dense tables.
+
+Preferred format:
+
+```text
+predicament, noun, 困境. It means a difficult or unpleasant situation. Listen for it when the author describes a person with no good options.
+```
+
+Add pronunciation help for hard names, foreign names, Chinese pinyin, technical terms, and words whose spelling may mislead TTS or the listener.
+
+Avoid over-listing obvious words, proper names better handled in notes, and rare words that are not useful for future reading.
+
+## Translation When Chinese Is Missing
+
+If no Chinese EPUB is available, translate the English chapters into faithful, readable Chinese.
+
+The translation should preserve meaning, tone, argument, and narrative flow while avoiding stiff literal Chinese. Do not freely adapt or simplify the text unless a note explains why.
+
+## Audio And TTS Rules
+
+Optimize the generated EPUB for AI read-aloud by default.
+
+Use:
+
+- Clear, complete sentences.
+- Short sections with descriptive headings.
+- Spoken-friendly vocabulary explanations.
+- Pronunciation hints where helpful.
+- Labels such as `Optional Reference` or `Detailed Background For Visual Review` for material that should be skipped during first listening.
+
+Avoid:
+
+- Raw URLs in listener-facing text.
+- Dense Markdown-style tables.
+- Symbol-heavy lists.
+- Footnote clutter.
+- Page numbers and running headers.
+- OCR artifacts.
+- Long parenthetical chains.
+- Interrupting source chapters once they begin.
+
+Add a short bilingual chapter recap after the English chapter when it helps retention.
