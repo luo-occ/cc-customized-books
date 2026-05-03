@@ -1,0 +1,105 @@
+{
+  "slug": "animal-farm",
+  "title": "Animal Farm / 动物农场 - Customized Bilingual Companion Edition",
+  "author": "George Orwell",
+  "language": "en",
+  "description": "Customized bilingual Animal Farm EPUB with chapter briefs, companion notes, vocabulary support, and optional Chinese edition references.",
+  "sources": {
+    "english": "books/Animal Farm/Animal Farm (George Orwell) (z-library.sk, 1lib.sk, z-lib.sk).epub",
+    "chinese": "books/Animal Farm/动物农场 ([英]乔治·奥威尔) (z-library.sk, 1lib.sk, z-lib.sk).epub"
+  },
+  "output": {
+    "epub": "output/Animal Farm/Animal Farm - Customized Bilingual Companion.epub",
+    "pairing_map": "output/Animal Farm/pairing-map.md"
+  },
+  "pairings": [
+    {
+      "english_label": "Chapter One",
+      "english_href": "index_split_003.html",
+      "chinese_label": "第一章",
+      "chinese_href": "OEBPS/Text/part0003.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Two",
+      "english_href": "index_split_004.html",
+      "chinese_label": "第二章",
+      "chinese_href": "OEBPS/Text/part0005.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Three",
+      "english_href": "index_split_005.html",
+      "chinese_label": "第三章",
+      "chinese_href": "OEBPS/Text/part0007.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Four",
+      "english_href": "index_split_006.html",
+      "chinese_label": "第四章",
+      "chinese_href": "OEBPS/Text/part0009.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Five",
+      "english_href": "index_split_007.html",
+      "chinese_label": "第五章",
+      "chinese_href": "OEBPS/Text/part0011.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Six",
+      "english_href": "index_split_008.html",
+      "chinese_label": "第六章",
+      "chinese_href": "OEBPS/Text/part0013.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Seven",
+      "english_href": "index_split_009.html",
+      "chinese_label": "第七章",
+      "chinese_href": "OEBPS/Text/part0015.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Eight",
+      "english_href": "index_split_010.html",
+      "chinese_label": "第八章",
+      "chinese_href": "OEBPS/Text/part0017.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Nine",
+      "english_href": "index_split_011.html",
+      "chinese_label": "第九章",
+      "chinese_href": "OEBPS/Text/part0019.xhtml",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter Ten",
+      "english_href": "index_split_012.html",
+      "chinese_label": "第十章",
+      "chinese_href": "OEBPS/Text/part0021.xhtml",
+      "status": "matched"
+    }
+  ],
+  "optional_sections": [
+    {
+      "title": "Chinese Translator Preface",
+      "source": "Chinese edition frontmatter",
+      "href": "OEBPS/Text/part0001.xhtml",
+      "action": "visual-only",
+      "language": "zh",
+      "intro": "This preface belongs to the Chinese edition rather than Orwell's main narrative. It can add context, but it can be skipped during a first listening pass."
+    },
+    {
+      "title": "Ukrainian Edition Preface",
+      "source": "Chinese edition appendix",
+      "href": "OEBPS/Text/part0023.xhtml",
+      "action": "visual-only",
+      "language": "zh",
+      "intro": "This appendix is relevant to Orwell's political intent, but it sits outside the main ten-chapter novel."
+    }
+  ]
+}
