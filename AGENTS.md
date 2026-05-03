@@ -58,6 +58,19 @@ Follow this workflow for every target book:
 11. Assemble the bilingual EPUB with a usable table of contents.
 12. Run the quality checklist before finishing.
 
+## Reusable Framework Workflow
+
+Use the reusable framework for final EPUB builds instead of generating a new one-off script for each book.
+
+For each book:
+
+1. Create or update `book_projects/<slug>/project.json` with source EPUB paths, output paths, pairings, and optional source-section decisions.
+2. Create or update `book_projects/<slug>/companion.json` with book companion notes, chapter listening briefs, chapter companion references, vocabulary, recaps, and pronunciation help.
+3. Run `PYTHONPATH=scripts python3 scripts/build_custom_epub.py book_projects/<slug>`.
+4. Verify the generated EPUB and pairing map under `output/<Book Name>/`.
+
+Book-specific helper scripts may be used for temporary investigation, but they should not be the final deliverable. Preserve reusable mechanics in `scripts/custom_epub/` and book-specific judgment in `book_projects/<slug>/`.
+
 ## Source Detection
 
 Use several signals before deciding which EPUB is English and which is Chinese:
