@@ -32,7 +32,7 @@ def make_minimal_epub(path: Path, label: str, href: str, paragraph: str) -> None
 
 
 class BuilderSmokeTests(unittest.TestCase):
-    def test_build_project_creates_epub_and_pairing_map_without_raw_urls(self):
+    def test_build_project_creates_epub_and_pairing_map_without_listening_noise(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             books = root / "books" / "Sample"
@@ -135,6 +135,12 @@ class BuilderSmokeTests(unittest.TestCase):
             self.assertIn("Chapter 1 Listening Brief", xhtml)
             self.assertIn("Chapter 1 Companion Reference", xhtml)
             self.assertNotIn("https://", xhtml)
+            self.assertNotIn("References For Visual Review", xhtml)
+            self.assertNotIn("Publisher page", xhtml)
+            self.assertNotIn("English source text from", xhtml)
+            self.assertNotIn("Chinese source text from", xhtml)
+            pairing_map = result.pairing_map.read_text(encoding="utf-8")
+            self.assertIn("# Sample Pairing Map", pairing_map)
 
 
 if __name__ == "__main__":
