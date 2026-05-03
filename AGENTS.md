@@ -197,3 +197,68 @@ Avoid:
 - Interrupting source chapters once they begin.
 
 Add a short bilingual chapter recap after the English chapter when it helps retention.
+
+## EPUB Assembly Requirements
+
+The final EPUB must be readable, navigable, and pleasant to listen to.
+
+Recommended table of contents pattern:
+
+1. Book Companion
+2. Chapter 1 Listening Brief
+3. Chapter 1 Companion Reference
+4. Chapter 1 Chinese
+5. Chapter 1 Vocabulary For Listening
+6. Chapter 1 English
+7. Chapter 1 Recap
+
+Repeat the pattern for each chapter or major section. Preserve the original book order.
+
+If EPUB tooling is unavailable, create an intermediate structured HTML or XHTML package, explain the blocker clearly, and continue aiming for EPUB as the required final deliverable.
+
+## Error Handling
+
+Pause and surface issues when:
+
+- The target folder contains multiple plausible English or Chinese books.
+- Metadata and sampled text disagree about language.
+- The English and Chinese editions have different chapter counts.
+- A Chinese edition appears abridged or reordered.
+- A source EPUB has OCR errors, missing text, broken table of contents, or image-only pages.
+- Notes, appendices, or indexes are too large to include naturally.
+
+When a risk is understood, create a clear pairing or inclusion plan and proceed. Do not silently drop material or invent missing source text.
+
+## Final Quality Checklist
+
+Before finishing, verify:
+
+- Correct English and Chinese source book pairing.
+- Chapter count and chapter order.
+- Any mismatched chapters have an explicit pairing map.
+- No silent skips of frontmatter, epilogue, notes, appendices, acknowledgments, image-heavy sections, or indexes.
+- Chapter listening brief and companion reference appear before the Chinese chapter.
+- Chinese appears before English for each paired chapter.
+- Vocabulary appears immediately before the English chapter.
+- Vocabulary is prioritized for learning value and calibrated to the user's profile.
+- Book-level outside research includes useful references and deep insights.
+- Raw web URLs do not appear in listener-facing text.
+- Generated notes, vocabulary, and references are TTS-friendly.
+- Pronunciation guidance is included for hard names and terms where useful.
+- Optional or visual-reference material is clearly marked as skippable during listening.
+- EPUB opens successfully.
+- Table of contents is usable.
+- Final response gives the output path and mentions unresolved alignment or source-quality issues.
+
+## Final Response Requirements
+
+When a customized EPUB is produced, the final response must include:
+
+- Output EPUB path.
+- Target book folder.
+- Source EPUBs used.
+- Whether Chinese text came from a source EPUB or from translation.
+- Any unresolved alignment or source-quality issues.
+- Any sections intentionally summarized, flagged, or made optional for listening.
+
+Keep the final response concise and practical.
