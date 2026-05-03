@@ -22,7 +22,7 @@ For each target book, produce a final EPUB customized for the user.
 The EPUB must include:
 
 - A substantial bilingual book companion at the top.
-- Recommended book-level outside research with deep insights and readable source labels.
+- Recommended book-level outside research with deep insights that stay focused on the book itself.
 - Optional reading plan or pacing suggestion when the book is long, dense, or difficult.
 - Chapter-level alignment only, not paragraph-level alignment.
 - For each chapter or major section:
@@ -69,6 +69,8 @@ For each book:
 3. Run `PYTHONPATH=scripts python3 scripts/build_custom_epub.py book_projects/<slug>`.
 4. Verify the generated EPUB and pairing map under `output/<Book Name>/`.
 
+The main listening EPUB should contain only book-relevant learning content and source text. Pairing maps, references, edition notes, and provenance details belong in sidecar artifacts or final reports, not in the listening flow.
+
 Book-specific helper scripts may be used for temporary investigation, but they should not be the final deliverable. Preserve reusable mechanics in `scripts/custom_epub/` and book-specific judgment in `book_projects/<slug>/`.
 
 ## Source Detection
@@ -111,6 +113,8 @@ Pause and ask the user only when the mismatch changes the reading experience in 
 
 The book-level companion should be substantial and bilingual. Put the main explanation in Chinese first, then add a concise English summary.
 
+For listening EPUBs, keep the Book Companion content-only. Do not include references lists, pairing explanations, edition-handling notes, provenance notes, or build-process explanations inside the main EPUB.
+
 Include:
 
 - What the book is about.
@@ -124,7 +128,7 @@ Include:
 - An optional reading schedule when the book benefits from pacing.
 - Parts worth reading closely.
 - Parts that can be skimmed.
-- References and further reading with human-readable source labels.
+- Listening-focused guidance that stays on the book itself rather than the artifact.
 
 Outside research is recommended by default for the book-level companion, especially for biography, history, politics, culture, technology, and idea-driven nonfiction. For modern facts, current public figures, laws, products, software, or community consensus, verify with up-to-date sources.
 
@@ -149,6 +153,8 @@ The deeper companion reference should include Chinese explanation first and conc
 - Key people, places, ideas, terms, or events.
 - Reading priority: read closely or skim lightly.
 - Difficult cultural references or disputed claims when relevant.
+
+Do not add source-edition descriptions or provenance text such as `English source text from ...` or `Chinese source text from ...` inside the chapter flow unless the user explicitly asks for an audit/study edition.
 
 Mark long background explanations, detailed source notes, and dense references as optional or visual-reference material when they would interrupt listening flow.
 
