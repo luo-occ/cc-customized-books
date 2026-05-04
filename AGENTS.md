@@ -72,6 +72,7 @@ For each book:
 The main listening EPUB should contain only book-relevant learning content and source text. Pairing maps, references, edition notes, and provenance details belong in sidecar artifacts or final reports, not in the listening flow.
 
 Book-specific helper scripts may be used for temporary investigation, but they should not be the final deliverable. Preserve reusable mechanics in `scripts/custom_epub/` and book-specific judgment in `book_projects/<slug>/`.
+Customized EPUBs should inherit the source-book cover by default: prefer the English source cover, and fall back to the Chinese source cover only if the English cover cannot be extracted.
 
 ## Source Detection
 
