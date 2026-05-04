@@ -54,6 +54,7 @@ Follow this workflow for every target book:
 6. Read `glossary/vocabulary_profile.json` and `glossary/english_words.txt` before selecting vocabulary.
 7. Create book-level deep bilingual companion notes with outside research when helpful.
 8. For each chapter, create both a concise listening brief and deeper bilingual companion notes before the Chinese chapter.
+If a Chinese chapter exists but is unusable for listening, replace it with agent-authored Chinese translation from the English chapter rather than using scan images or OCR salvage.
 9. For each English chapter, create a learning-priority vocabulary list before the English chapter.
 10. Add a short chapter recap after the English chapter when useful for retention.
 11. Assemble the bilingual EPUB with a usable table of contents.
@@ -204,6 +205,8 @@ Avoid over-listing obvious words, proper names better handled in notes, and rare
 ## Translation When Chinese Is Missing
 
 If no Chinese EPUB is available, translate the English chapters into faithful, readable Chinese.
+
+For listening EPUBs, treat image-only Chinese chapters and unreadable OCR-like Chinese chapters as missing Chinese text. Do not use scan images or OCR garbage as the main Chinese chapter body. Instead, provide faithful, readable Chinese translation from the English chapter and use that as the Chinese chapter in the listening flow.
 
 The translation should preserve meaning, tone, argument, and narrative flow while avoiding stiff literal Chinese. Do not freely adapt or simplify the text unless a note explains why.
 
