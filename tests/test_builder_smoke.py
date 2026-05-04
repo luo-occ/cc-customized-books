@@ -134,10 +134,23 @@ class BuilderSmokeTests(unittest.TestCase):
                         "companion_zh": "中文导读",
                         "summary_en": "English summary.",
                         "references": [{"label": "Publisher page"}],
+                        "teacher_mode": {
+                            "central_thesis": {
+                                "zh": "这本书考察语言和权力。",
+                                "en": "This book studies language and power.",
+                            },
+                            "why_it_matters": "它解释理想如何被权力接管。",
+                            "context_frame": "放回革命政治史里理解。",
+                            "strong_interpretation": "它最强的是模式，不是单纯影射。",
+                            "blind_spots": "它压缩了复杂社会层次。",
+                            "what_to_watch": ["注意谁在解释现实。"],
+                            "questions_to_carry": ["谁在定义现实？"],
+                        },
                     },
                     "chapters": [
                         {
                             "english_label": "Chapter One",
+                            "key_chapter": True,
                             "listening_brief": {
                                 "names": "Name",
                                 "points": ["Listen for contrast."],
@@ -152,6 +165,13 @@ class BuilderSmokeTests(unittest.TestCase):
                                 "Must know": ["contrast, noun, 对比。"],
                                 "Useful / high-value": [],
                                 "Specialized or context-bound": [],
+                            },
+                            "mini_lecture": {
+                                "chapter_thesis": "这一章建立政治词汇。",
+                                "why_pivotal": "后面的背叛都从这里开始。",
+                                "deeper_interpretation": "革命先靠语言成立。",
+                                "rival_reading": "也可以读成神话化开端。",
+                                "questions_to_carry": ["诗意为什么会变成命令？"],
                             },
                             "recap": {
                                 "zh": "中文回顾",
@@ -190,6 +210,11 @@ class BuilderSmokeTests(unittest.TestCase):
                 )
             self.assertIn("Chapter 1 Listening Brief", xhtml)
             self.assertIn("Chapter 1 Companion Reference", xhtml)
+            self.assertIn("Central Thesis / 核心判断", xhtml)
+            self.assertIn("Questions to carry / 带着走的问题", xhtml)
+            self.assertIn("Mini Lecture / 深入讲解", xhtml)
+            self.assertIn("谁在定义现实？", xhtml)
+            self.assertIn("诗意为什么会变成命令？", xhtml)
             self.assertNotIn("https://", xhtml)
             self.assertNotIn("References For Visual Review", xhtml)
             self.assertNotIn("Publisher page", xhtml)
