@@ -18,6 +18,8 @@ def make_minimal_epub(
     cover_media_type: Optional[str] = None,
     cover_content: Optional[bytes] = None,
     metadata_cover_id: str = "cover",
+    body_html: Optional[str] = None,
+    extra_files: Optional[list[tuple[str, bytes]]] = None,
 ) -> None:
     manifest_items = [
         '<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>',
@@ -51,10 +53,12 @@ def make_minimal_epub(
         )
         zf.writestr(
             f"OEBPS/{href}",
-            f"<html><body><h1>{label}</h1><p>{paragraph}</p></body></html>",
+            body_html or f"<html><body><h1>{label}</h1><p>{paragraph}</p></body></html>",
         )
         if cover_href is not None and cover_content is not None:
             zf.writestr(f"OEBPS/{cover_href}", cover_content)
+        for extra_path, extra_content in extra_files or []:
+            zf.writestr(extra_path, extra_content)
 
 
 class BuilderSmokeTests(unittest.TestCase):
@@ -267,6 +271,39 @@ class BuilderSmokeTests(unittest.TestCase):
                 )
                 content_opf = zf.read("EPUB/content.opf").decode("utf-8")
             self.assertIn('name="cover"', content_opf)
+
+    def test_build_project_embeds_assets_for_image_only_chinese_chapters(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            books = root / "books" / "Sample"
+            project_dir = self._write_project_fixture(root)
+            make_minimal_epub(
+                books / "zh.epub",
+                "第一章",
+                "Text/zh1.xhtml",
+                "unused",
+                body_html=(
+                    '<html><body><p class="center">'
+                    '<img alt="" src="../Images/zh-page.png"/>'
+                    "</p></body></html>"
+                ),
+                extra_files=[("OEBPS/Images/zh-page.png", b"fake-image-bytes")],
+            )
+
+            result = build_project(project_dir, root)
+
+            self.assertIn(
+                "Chinese chapter '第一章' is image-only in the source EPUB; TTS will not read it.",
+                result.warnings,
+            )
+            with ZipFile(result.output_epub) as zf:
+                names = zf.namelist()
+                self.assertIn("EPUB/assets/ch01-zh-01.png", names)
+                self.assertEqual(
+                    zf.read("EPUB/assets/ch01-zh-01.png"), b"fake-image-bytes"
+                )
+                zh_page = zf.read("EPUB/ch01-zh.xhtml").decode("utf-8")
+            self.assertIn('src="assets/ch01-zh-01.png"', zh_page)
 
 
 if __name__ == "__main__":

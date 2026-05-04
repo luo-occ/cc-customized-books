@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import mimetypes
 import posixpath
 from pathlib import Path
 from zipfile import ZipFile
 
+from bs4 import BeautifulSoup
 from ebooklib import epub
 
 from .epub_io import extract_cover_asset, extract_href_fragment, read_container_path
@@ -96,6 +98,56 @@ def _extract_fragment(epub_path: Path, href: str) -> str:
     return extract_href_fragment(epub_path, _normalize_extract_href(epub_path, href))
 
 
+def _prepare_fragment(
+    book: epub.EpubBook,
+    epub_path: Path,
+    href: str,
+    *,
+    asset_prefix: str,
+    warning_label: str,
+) -> tuple[str, list[str]]:
+    normalized_href = _normalize_extract_href(epub_path, href)
+    fragment_html = extract_href_fragment(epub_path, normalized_href)
+    document_href = normalized_href.split("#", 1)[0]
+    document_dir = posixpath.dirname(document_href)
+    warnings: list[str] = []
+
+    with ZipFile(epub_path) as zf:
+        opf_dir = posixpath.dirname(read_container_path(zf))
+        soup = BeautifulSoup(fragment_html, "html.parser")
+        images = soup.find_all("img")
+        for index, image in enumerate(images, start=1):
+            src = image.get("src", "").strip()
+            if not src or src.startswith(("data:", "http://", "https://")):
+                continue
+            source_href = posixpath.normpath(posixpath.join(document_dir, src))
+            source_member = (
+                posixpath.normpath(posixpath.join(opf_dir, source_href))
+                if opf_dir
+                else source_href
+            )
+            suffix = Path(source_href).suffix or ".bin"
+            target_name = f"assets/{asset_prefix}-{index:02d}{suffix}"
+            media_type = mimetypes.guess_type(source_href)[0] or "application/octet-stream"
+            book.add_item(
+                epub.EpubItem(
+                    uid=f"{asset_prefix}_asset_{index}",
+                    file_name=target_name,
+                    media_type=media_type,
+                    content=zf.read(source_member),
+                )
+            )
+            image["src"] = target_name
+
+        has_visible_text = bool(soup.get_text(" ", strip=True))
+        if images and not has_visible_text:
+            warnings.append(
+                f"{warning_label} is image-only in the source EPUB; TTS will not read it."
+            )
+
+        return str(soup), warnings
+
+
 def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResult:
     resolved_project_dir = Path(project_dir).resolve()
     resolved_repo_root = Path(repo_root).resolve() if repo_root is not None else None
@@ -177,10 +229,25 @@ def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResu
             raise ValueError(f"Missing companion chapter for {pairing.english_label}")
 
         file_names = section_file_names(index)
-        english_fragment = _extract_fragment(project.english_epub, pairing.english_href)
+        english_fragment, english_warnings = _prepare_fragment(
+            book,
+            project.english_epub,
+            pairing.english_href,
+            asset_prefix=f"ch{index:02d}-en",
+            warning_label=f"English chapter '{pairing.english_label}'",
+        )
         chinese_fragment = ""
+        chapter_warnings = list(english_warnings)
         if project.chinese_epub is not None and pairing.chinese_href:
-            chinese_fragment = _extract_fragment(project.chinese_epub, pairing.chinese_href)
+            chinese_fragment, chinese_warnings = _prepare_fragment(
+                book,
+                project.chinese_epub,
+                pairing.chinese_href,
+                asset_prefix=f"ch{index:02d}-zh",
+                warning_label=f"Chinese chapter '{pairing.chinese_label or pairing.english_label}'",
+            )
+            chapter_warnings.extend(chinese_warnings)
+        warnings.extend(chapter_warnings)
 
         rendered_pages = render_chapter_pages(
             index,
