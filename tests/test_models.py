@@ -301,6 +301,59 @@ class ModelLoadingTests(unittest.TestCase):
                 "这一章建立了整本书最重要的道德词汇。",
             )
 
+    def test_load_companion_supports_generated_chinese_chapter_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            project_dir = Path(tmp)
+            (project_dir / "companion.json").write_text(
+                json.dumps(
+                    {
+                        "book": {
+                            "companion_zh": "中文导读",
+                            "summary_en": "English guide",
+                            "references": [],
+                        },
+                        "chapters": [
+                            {
+                                "english_label": "Chapter One",
+                                "listening_brief": {
+                                    "names": "Old Major",
+                                    "points": ["Listen for the speech."],
+                                    "context": "Opening chapter.",
+                                },
+                                "companion": {
+                                    "zh": "中文章节导读",
+                                    "en": "English chapter summary.",
+                                    "priority": "Read closely.",
+                                },
+                                "chinese_text": {
+                                    "mode": "generated_translation",
+                                    "content": "第一段中文译文。\n\n第二段中文译文。",
+                                    "reason": "image_only_source",
+                                },
+                                "vocabulary": {
+                                    "Must know": ["comrade, noun, 同志。"],
+                                    "Useful / high-value": [],
+                                    "Specialized or context-bound": [],
+                                },
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            companion = load_companion(project_dir)
+
+            self.assertEqual(
+                companion.chapters[0].chinese_text.mode,
+                "generated_translation",
+            )
+            self.assertEqual(
+                companion.chapters[0].chinese_text.reason,
+                "image_only_source",
+            )
+            self.assertIn("第一段中文译文", companion.chapters[0].chinese_text.content)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -92,6 +92,13 @@ class MiniLecture:
 
 
 @dataclass(frozen=True)
+class ChapterChineseText:
+    mode: str
+    content: str
+    reason: str
+
+
+@dataclass(frozen=True)
 class CompanionChapter:
     english_label: str
     listening_brief: ListeningBrief
@@ -100,6 +107,7 @@ class CompanionChapter:
     recap: Recap | None
     key_chapter: bool = False
     mini_lecture: MiniLecture | None = None
+    chinese_text: ChapterChineseText | None = None
 
 
 @dataclass(frozen=True)
@@ -212,6 +220,7 @@ def load_companion(project_dir: Path) -> CompanionData:
         companion = row["companion"]
         recap_data = row.get("recap")
         mini_lecture_data = row.get("mini_lecture")
+        chinese_text_data = row.get("chinese_text")
         mini_lecture = None
         if mini_lecture_data is not None:
             mini_lecture = MiniLecture(
@@ -223,6 +232,13 @@ def load_companion(project_dir: Path) -> CompanionData:
                     mini_lecture_data.get("questions_to_carry", []),
                     "mini_lecture.questions_to_carry",
                 ),
+            )
+        chinese_text = None
+        if chinese_text_data is not None:
+            chinese_text = ChapterChineseText(
+                mode=chinese_text_data["mode"],
+                content=chinese_text_data["content"],
+                reason=chinese_text_data["reason"],
             )
         chapters.append(
             CompanionChapter(
@@ -250,6 +266,7 @@ def load_companion(project_dir: Path) -> CompanionData:
                 else None,
                 key_chapter=bool(row.get("key_chapter", False)),
                 mini_lecture=mini_lecture,
+                chinese_text=chinese_text,
             )
         )
     return CompanionData(
