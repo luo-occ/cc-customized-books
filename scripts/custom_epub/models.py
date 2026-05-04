@@ -47,6 +47,19 @@ class BookCompanion:
     companion_zh: str
     summary_en: str
     references: list[dict[str, str]]
+    teacher_mode: BookTeacherMode | None = None
+
+
+@dataclass(frozen=True)
+class BookTeacherMode:
+    central_thesis_zh: str
+    central_thesis_en: str
+    why_it_matters: str
+    context_frame: str
+    strong_interpretation: str
+    blind_spots: str
+    what_to_watch: list[str]
+    questions_to_carry: list[str]
 
 
 @dataclass(frozen=True)
@@ -70,12 +83,23 @@ class Recap:
 
 
 @dataclass(frozen=True)
+class MiniLecture:
+    chapter_thesis: str
+    why_pivotal: str
+    deeper_interpretation: str
+    rival_reading: str
+    questions_to_carry: list[str]
+
+
+@dataclass(frozen=True)
 class CompanionChapter:
     english_label: str
     listening_brief: ListeningBrief
     companion: ChapterCompanion
     vocabulary: dict[str, list[str]]
     recap: Recap | None
+    key_chapter: bool = False
+    mini_lecture: MiniLecture | None = None
 
 
 @dataclass(frozen=True)
@@ -101,6 +125,13 @@ def _require_list(value: Any, field_name: str) -> list[Any]:
     if not isinstance(value, list):
         raise TypeError(f"{field_name} must be a list")
     return value
+
+
+def _require_str_list(value: Any, field_name: str) -> list[str]:
+    items = _require_list(value, field_name)
+    if not all(isinstance(item, str) for item in items):
+        raise TypeError(f"{field_name} must be a list of strings")
+    return list(items)
 
 
 def load_book_project(project_dir: Path, repo_root: Path | None = None) -> BookProject:
@@ -155,11 +186,44 @@ def load_book_project(project_dir: Path, repo_root: Path | None = None) -> BookP
 def load_companion(project_dir: Path) -> CompanionData:
     data = _read_json(project_dir / "companion.json")
     book_data = data["book"]
+    teacher_mode_data = book_data.get("teacher_mode")
+    teacher_mode = None
+    if teacher_mode_data is not None:
+        thesis = teacher_mode_data["central_thesis"]
+        teacher_mode = BookTeacherMode(
+            central_thesis_zh=thesis["zh"],
+            central_thesis_en=thesis["en"],
+            why_it_matters=teacher_mode_data["why_it_matters"],
+            context_frame=teacher_mode_data["context_frame"],
+            strong_interpretation=teacher_mode_data["strong_interpretation"],
+            blind_spots=teacher_mode_data["blind_spots"],
+            what_to_watch=_require_str_list(
+                teacher_mode_data.get("what_to_watch", []),
+                "book.teacher_mode.what_to_watch",
+            ),
+            questions_to_carry=_require_str_list(
+                teacher_mode_data.get("questions_to_carry", []),
+                "book.teacher_mode.questions_to_carry",
+            ),
+        )
     chapters = []
     for row in data["chapters"]:
         brief = row["listening_brief"]
         companion = row["companion"]
         recap_data = row.get("recap")
+        mini_lecture_data = row.get("mini_lecture")
+        mini_lecture = None
+        if mini_lecture_data is not None:
+            mini_lecture = MiniLecture(
+                chapter_thesis=mini_lecture_data["chapter_thesis"],
+                why_pivotal=mini_lecture_data["why_pivotal"],
+                deeper_interpretation=mini_lecture_data["deeper_interpretation"],
+                rival_reading=mini_lecture_data["rival_reading"],
+                questions_to_carry=_require_str_list(
+                    mini_lecture_data.get("questions_to_carry", []),
+                    "mini_lecture.questions_to_carry",
+                ),
+            )
         chapters.append(
             CompanionChapter(
                 english_label=row["english_label"],
@@ -184,6 +248,8 @@ def load_companion(project_dir: Path) -> CompanionData:
                 recap=Recap(zh=recap_data["zh"], en=recap_data["en"])
                 if recap_data
                 else None,
+                key_chapter=bool(row.get("key_chapter", False)),
+                mini_lecture=mini_lecture,
             )
         )
     return CompanionData(
@@ -191,6 +257,7 @@ def load_companion(project_dir: Path) -> CompanionData:
             companion_zh=book_data["companion_zh"],
             summary_en=book_data["summary_en"],
             references=list(book_data.get("references", [])),
+            teacher_mode=teacher_mode,
         ),
         chapters=chapters,
     )

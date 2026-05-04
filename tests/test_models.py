@@ -218,6 +218,89 @@ class ModelLoadingTests(unittest.TestCase):
             with self.assertRaisesRegex(TypeError, "vocabulary bucket 'Must know' must be a list"):
                 load_companion(project_dir)
 
+    def test_load_companion_supports_teacher_mode_sections(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            project_dir = Path(tmp)
+            (project_dir / "companion.json").write_text(
+                json.dumps(
+                    {
+                        "book": {
+                            "companion_zh": "总导读",
+                            "summary_en": "Short summary.",
+                            "references": [],
+                            "teacher_mode": {
+                                "central_thesis": {
+                                    "zh": "这本书真正关心的是革命如何丢掉自己的语言。",
+                                    "en": "The book is really about how revolutions lose control of their own language.",
+                                },
+                                "why_it_matters": "它把政治腐化写成了日常经验。",
+                                "context_frame": "要把它放回二十世纪革命政治与宣传史里去读。",
+                                "strong_interpretation": "它最厉害的地方不是影射，而是模式提炼。",
+                                "blind_spots": "它压缩了复杂历史，也弱化了群众内部差异。",
+                                "what_to_watch": [
+                                    "注意口号怎样越来越短。",
+                                    "注意谁在解释现实。",
+                                ],
+                                "questions_to_carry": [
+                                    "语言何时开始不再描述事实，而开始制造事实？",
+                                    "忠诚为什么比怀疑更容易被制度利用？",
+                                ],
+                            },
+                        },
+                        "chapters": [
+                            {
+                                "english_label": "Chapter One",
+                                "key_chapter": True,
+                                "listening_brief": {
+                                    "names": "Old Major",
+                                    "points": [
+                                        "Listen for the first political vocabulary."
+                                    ],
+                                    "context": "Opening chapter.",
+                                },
+                                "companion": {
+                                    "zh": "中文章节导读",
+                                    "en": "English chapter summary.",
+                                    "priority": "Read closely.",
+                                },
+                                "mini_lecture": {
+                                    "chapter_thesis": "这一章建立了整本书最重要的道德词汇。",
+                                    "why_pivotal": "后面的背叛都要回到这里来改写。",
+                                    "deeper_interpretation": "老少校真正留下的不是计划，而是一套可被争夺的语言。",
+                                    "rival_reading": "也可以把它读成一次带有怀旧色彩的政治神话奠基。",
+                                    "questions_to_carry": [
+                                        "理想在诞生时为什么总带着诗意？",
+                                        "诗意又为什么容易被制度接管？",
+                                    ],
+                                },
+                                "vocabulary": {
+                                    "Must know": ["comrade, noun, 同志。"],
+                                    "Useful / high-value": [],
+                                    "Specialized or context-bound": [],
+                                },
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            companion = load_companion(project_dir)
+
+            self.assertEqual(
+                companion.book.teacher_mode.central_thesis_zh,
+                "这本书真正关心的是革命如何丢掉自己的语言。",
+            )
+            self.assertEqual(
+                companion.book.teacher_mode.questions_to_carry[0],
+                "语言何时开始不再描述事实，而开始制造事实？",
+            )
+            self.assertTrue(companion.chapters[0].key_chapter)
+            self.assertEqual(
+                companion.chapters[0].mini_lecture.chapter_thesis,
+                "这一章建立了整本书最重要的道德词汇。",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
