@@ -49,6 +49,12 @@ class CoverAsset:
     content: bytes
 
 
+@dataclass(frozen=True)
+class ChapterTextUsability:
+    kind: str
+    is_usable: bool
+
+
 def read_container_path(zf: ZipFile) -> str:
     container_xml = zf.read(CONTAINER_PATH)
     root = ET.fromstring(container_xml)
@@ -131,6 +137,32 @@ def clean_body_fragment(raw: str) -> str:
                 del tag.attrs[attr_name]
 
     return "".join(str(node) for node in body.contents).strip()
+
+
+def assess_chinese_chapter_text(fragment_html: str) -> ChapterTextUsability:
+    soup = BeautifulSoup(fragment_html, "html.parser")
+    images = soup.find_all("img")
+    visible_text = soup.get_text(" ", strip=True)
+
+    if images and not visible_text:
+        return ChapterTextUsability(kind="image_only", is_usable=False)
+
+    chinese_chars = sum(1 for ch in visible_text if "\u4e00" <= ch <= "\u9fff")
+    latin_or_digits = sum(1 for ch in visible_text if ch.isascii() and ch.isalnum())
+    compact_text = "".join(ch for ch in visible_text if not ch.isspace())
+
+    if chinese_chars >= 12:
+        density = chinese_chars / max(len(compact_text), 1)
+        if density >= 0.35:
+            return ChapterTextUsability(kind="readable_text", is_usable=True)
+
+    if chinese_chars > 0 and latin_or_digits > chinese_chars:
+        return ChapterTextUsability(kind="unreadable_ocr", is_usable=False)
+
+    if chinese_chars == 0:
+        return ChapterTextUsability(kind="missing_text", is_usable=False)
+
+    return ChapterTextUsability(kind="unreadable_ocr", is_usable=False)
 
 
 def extract_href_fragment(epub_path: str | Path, href: str) -> str:

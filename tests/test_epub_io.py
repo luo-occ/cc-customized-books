@@ -6,6 +6,7 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 from custom_epub.epub_io import (
+    assess_chinese_chapter_text,
     clean_body_fragment,
     extract_cover_asset,
     extract_href_fragment,
@@ -255,6 +256,30 @@ class EpubIoTests(unittest.TestCase):
             self.assertEqual(cover.href, "OPS/Images/front-cover.png")
             self.assertEqual(cover.media_type, "image/png")
             self.assertEqual(cover.content, b"png-bytes")
+
+    def test_assess_chinese_chapter_text_marks_image_only_fragment_unusable(self):
+        fragment = '<p class="center"><img alt="" src="../Images/page001.jpeg"/></p>'
+
+        usability = assess_chinese_chapter_text(fragment)
+
+        self.assertEqual(usability.kind, "image_only")
+        self.assertFalse(usability.is_usable)
+
+    def test_assess_chinese_chapter_text_accepts_real_chinese_prose(self):
+        fragment = "<div><p>动物们一齐向前冲去，谁也不再等待命令。</p></div>"
+
+        usability = assess_chinese_chapter_text(fragment)
+
+        self.assertEqual(usability.kind, "readable_text")
+        self.assertTrue(usability.is_usable)
+
+    def test_assess_chinese_chapter_text_rejects_ocr_garbage(self):
+        fragment = "<div><p>动 物 农 场 口 号 7 诫 0 0 0 l I 1 口 口 口</p></div>"
+
+        usability = assess_chinese_chapter_text(fragment)
+
+        self.assertEqual(usability.kind, "unreadable_ocr")
+        self.assertFalse(usability.is_usable)
 
 
 if __name__ == "__main__":
