@@ -22,7 +22,7 @@ For each target book, produce a final EPUB customized for the user.
 The EPUB must include:
 
 - A substantial bilingual book companion at the top.
-- Recommended book-level outside research with deep insights and readable source labels.
+- Recommended book-level outside research with deep insights that stay focused on the book itself.
 - Optional reading plan or pacing suggestion when the book is long, dense, or difficult.
 - Chapter-level alignment only, not paragraph-level alignment.
 - For each chapter or major section:
@@ -40,6 +40,7 @@ The default chapter order is Chinese first, English second. Vocabulary goes imme
 ## Quality Bar
 
 The output should feel like a thoughtful bilingual reading tutor that is pleasant to hear aloud. It should reduce friction, preserve the original book, and avoid burying the source text under low-value notes.
+For serious reading support, default to a teacher-level voice: sharper interpretation, stronger ideas, selective rival views, and questions that help the user think with and against the book.
 
 ## Core Workflow
 
@@ -57,6 +58,22 @@ Follow this workflow for every target book:
 10. Add a short chapter recap after the English chapter when useful for retention.
 11. Assemble the bilingual EPUB with a usable table of contents.
 12. Run the quality checklist before finishing.
+
+## Reusable Framework Workflow
+
+Use the reusable framework for final EPUB builds instead of generating a new one-off script for each book.
+
+For each book:
+
+1. Create or update `book_projects/<slug>/project.json` with source EPUB paths, output paths, pairings, and optional source-section decisions.
+2. Create or update `book_projects/<slug>/companion.json` with book companion notes, chapter listening briefs, chapter companion references, vocabulary, recaps, and pronunciation help.
+3. Run `PYTHONPATH=scripts python3 scripts/build_custom_epub.py book_projects/<slug>`.
+4. Verify the generated EPUB and pairing map under `output/<Book Name>/`.
+
+The main listening EPUB should contain only book-relevant learning content and source text. Pairing maps, references, edition notes, and provenance details belong in sidecar artifacts or final reports, not in the listening flow.
+
+Book-specific helper scripts may be used for temporary investigation, but they should not be the final deliverable. Preserve reusable mechanics in `scripts/custom_epub/` and book-specific judgment in `book_projects/<slug>/`.
+Customized EPUBs should inherit the source-book cover by default: prefer the English source cover, and fall back to the Chinese source cover only if the English cover cannot be extracted.
 
 ## Source Detection
 
@@ -98,6 +115,10 @@ Pause and ask the user only when the mismatch changes the reading experience in 
 
 The book-level companion should be substantial and bilingual. Put the main explanation in Chinese first, then add a concise English summary.
 
+For listening EPUBs, keep the Book Companion content-only. Do not include references lists, pairing explanations, edition-handling notes, provenance notes, or build-process explanations inside the main EPUB.
+
+Default to teacher mode. The book-level companion should not stop at neutral summary. It should include a strong central thesis, explain why the book matters, offer a substantive interpretive frame, surface the most important blind spots or competing views, and end with sharp questions worth carrying through the reading.
+
 Include:
 
 - What the book is about.
@@ -111,7 +132,7 @@ Include:
 - An optional reading schedule when the book benefits from pacing.
 - Parts worth reading closely.
 - Parts that can be skimmed.
-- References and further reading with human-readable source labels.
+- Listening-focused guidance that stays on the book itself rather than the artifact.
 
 Outside research is recommended by default for the book-level companion, especially for biography, history, politics, culture, technology, and idea-driven nonfiction. For modern facts, current public figures, laws, products, software, or community consensus, verify with up-to-date sources.
 
@@ -137,7 +158,20 @@ The deeper companion reference should include Chinese explanation first and conc
 - Reading priority: read closely or skim lightly.
 - Difficult cultural references or disputed claims when relevant.
 
+For key chapters, add a compact mini lecture. A key chapter is either a turning point or unusually rich in thematic or intellectual density. The mini lecture should state what the chapter really accomplishes, why it is pivotal, the strongest reading of what is happening under the surface, the most useful rival reading, and a few sharp questions.
+
+Do not add source-edition descriptions or provenance text such as `English source text from ...` or `Chinese source text from ...` inside the chapter flow unless the user explicitly asks for an audit/study edition.
+
 Mark long background explanations, detailed source notes, and dense references as optional or visual-reference material when they would interrupt listening flow.
+
+## Book-Type Adaptation
+
+Adjust teacher mode by book type.
+
+- Fiction and literature: focus on form, symbols, moral tension, psychology, politics, and what the narrative reveals about human life.
+- History, biography, and politics: focus on argument, evidence, framing, omissions, ideology, and how the author wants the reader to judge events.
+- Philosophy, social thought, and theory: focus on claims, logic, assumptions, tensions, objections, and what follows if the argument is right.
+- Technical and knowledge books: focus on the core model, practical insight, hidden assumptions, community disagreement, and what is genuinely essential.
 
 ## Vocabulary For Listening
 

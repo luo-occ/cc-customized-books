@@ -1,1 +1,5 @@
 .worktrees/
+.DS_Store
+__pycache__/
+.pycache/
+scripts/build_animal_farm_custom_epub.py

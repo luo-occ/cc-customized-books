@@ -1,0 +1,86 @@
+{
+  "generated_on": "2026-05-03",
+  "wordlist_file": "english_words.txt",
+  "wordlist_format": {
+    "encoding": "utf-8",
+    "layout": "one lowercase word per line",
+    "sorted": true,
+    "deduplicated": true
+  },
+  "counts": {
+    "raw_rows_with_word": 2620,
+    "raw_unique_entries": 1439,
+    "single_token_alpha_entries": 1362,
+    "capitalized_alpha_removed": 23,
+    "manual_invalid_or_extreme_outlier_removed": 17,
+    "final_words": 1322
+  },
+  "filter_rules": [
+    "Drop rows whose word field contains Chinese characters or non-letter symbols.",
+    "Drop multi-word phrases, spaced expressions, hyphenated forms, and similar non-single-word entries by keeping only A-Z tokens.",
+    "Drop capitalized proper nouns, place names, brands, myth/history names, and acronym-like entries.",
+    "Drop only a very small set of obvious misspellings, corrupted tokens, or highly idiosyncratic non-general items."
+  ],
+  "manual_exclusions": [
+    "bioilm",
+    "cacut",
+    "deflat",
+    "detrius",
+    "disspirit",
+    "distermination",
+    "hllow",
+    "inconventience",
+    "ovries",
+    "panoro",
+    "panoromic",
+    "pereate",
+    "relih",
+    "runeblade",
+    "stdio",
+    "suctiony",
+    "vntage"
+  ],
+  "assessment": {
+    "cefr_estimate": "B2+ overall, with reading ability touching C1 in topics you care about",
+    "estimated_passive_vocabulary_word_families": {
+      "min": 7000,
+      "max": 10500
+    },
+    "estimated_active_vocabulary_word_families": {
+      "min": 3500,
+      "max": 5500
+    },
+    "confidence": "medium-low",
+    "summary": "Your unknown-word list mixes some everyday gaps with a large amount of upper-B2/C1 abstract vocabulary plus specialized technical terms. That usually suggests a strong B2 learner with uneven but ambitious reading exposure, especially in analytic or curiosity-driven domains.",
+    "profile_shape": "interest-driven and spiky rather than uniformly general-purpose",
+    "evidence": {
+      "advanced_common_examples": [
+        "inherent",
+        "eradicate",
+        "predicament",
+        "obstinate",
+        "anomaly",
+        "tenacious",
+        "lucrative",
+        "incredulity"
+      ],
+      "math_finance_technical_examples": [
+        "idempotency",
+        "arbitrage",
+        "telemetry",
+        "notarization",
+        "exponential",
+        "cohesive"
+      ],
+      "everyday_gap_examples": ["floor", "channel", "dawn", "blur", "tray", "mat", "bolt", "coach"]
+    },
+    "agent_guidance": {
+      "default_input_difficulty": "Use upper-B2 / lower-C1 English by default.",
+      "preserve_domain_terms": "Do not simplify away math, finance, technical, or academic vocabulary when it is relevant to the topic.",
+      "gloss_when": "Gloss dense idioms, phrasal verbs, or stacked specialist terms only when they are likely to block comprehension.",
+      "good_next_band": "High-frequency C1 abstract vocabulary, academic collocations, nuanced phrasal verbs, plus domain reading in math/finance/technology.",
+      "avoid_by_default": "Avoid unnecessary cultural proper nouns and niche reference-heavy jargon unless the task specifically needs them."
+    },
+    "caveat": "This is still an inference from saved unknown-word lists rather than a controlled vocabulary test, so other agents should use it as calibration guidance, not as a precise score."
+  }
+}

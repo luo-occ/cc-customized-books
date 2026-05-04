@@ -1,0 +1,119 @@
+body {
+  font-family: "Palatino", "Noto Serif CJK SC", serif;
+  line-height: 1.65;
+  margin: 5%;
+  color: #1f1c18;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  line-height: 1.25;
+  color: #3b2416;
+}
+
+h1 {
+  font-size: 1.9em;
+  margin-top: 0;
+}
+
+h2 {
+  margin-top: 1.4em;
+  border-top: 1px solid #d9c8b7;
+  padding-top: 0.5em;
+}
+
+h3 {
+  margin-top: 1.1em;
+}
+
+p,
+li {
+  font-size: 1em;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+.title-page {
+  text-align: center;
+  margin-top: 18%;
+}
+
+.title-page h1 {
+  font-size: 2.2em;
+  margin-bottom: 0.25em;
+}
+
+.title-page h2 {
+  border-top: 0;
+  padding-top: 0;
+  font-size: 1.35em;
+  color: #6a4e36;
+}
+
+.eyebrow,
+.optional-label,
+.source-note {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.82em;
+  color: #7a5d42;
+}
+
+.optional-label {
+  font-weight: bold;
+}
+
+.panel {
+  background: #f9f2e8;
+  border: 1px solid #e4d5c4;
+  border-radius: 8px;
+  padding: 0.9em 1.1em;
+  margin: 1em 0;
+}
+
+.panel p:first-child,
+.panel ul:first-child {
+  margin-top: 0;
+}
+
+.panel p:last-child,
+.panel ul:last-child {
+  margin-bottom: 0;
+}
+
+.priority {
+  font-weight: bold;
+  color: #6b2d13;
+}
+
+.english-summary {
+  border-left: 4px solid #d5a66a;
+  padding-left: 0.9em;
+  margin: 1em 0;
+}
+
+.source-text p {
+  text-indent: 0;
+  margin: 0.8em 0;
+}
+
+.source-text h1,
+.source-text h2,
+.source-text h3 {
+  page-break-after: avoid;
+}
+
+.recap {
+  background: #fff8ef;
+  border: 1px solid #ecdcbf;
+  padding: 1em 1.1em;
+  border-radius: 8px;
+}
+
+a {
+  color: #7d3f1d;
+}
