@@ -40,6 +40,7 @@ The default chapter order is Chinese first, English second. Vocabulary goes imme
 ## Quality Bar
 
 The output should feel like a thoughtful bilingual reading tutor that is pleasant to hear aloud. It should reduce friction, preserve the original book, and avoid burying the source text under low-value notes.
+For serious reading support, default to a teacher-level voice: sharper interpretation, stronger ideas, selective rival views, and questions that help the user think with and against the book.
 
 ## Core Workflow
 
@@ -116,6 +117,8 @@ The book-level companion should be substantial and bilingual. Put the main expla
 
 For listening EPUBs, keep the Book Companion content-only. Do not include references lists, pairing explanations, edition-handling notes, provenance notes, or build-process explanations inside the main EPUB.
 
+Default to teacher mode. The book-level companion should not stop at neutral summary. It should include a strong central thesis, explain why the book matters, offer a substantive interpretive frame, surface the most important blind spots or competing views, and end with sharp questions worth carrying through the reading.
+
 Include:
 
 - What the book is about.
@@ -155,9 +158,20 @@ The deeper companion reference should include Chinese explanation first and conc
 - Reading priority: read closely or skim lightly.
 - Difficult cultural references or disputed claims when relevant.
 
+For key chapters, add a compact mini lecture. A key chapter is either a turning point or unusually rich in thematic or intellectual density. The mini lecture should state what the chapter really accomplishes, why it is pivotal, the strongest reading of what is happening under the surface, the most useful rival reading, and a few sharp questions.
+
 Do not add source-edition descriptions or provenance text such as `English source text from ...` or `Chinese source text from ...` inside the chapter flow unless the user explicitly asks for an audit/study edition.
 
 Mark long background explanations, detailed source notes, and dense references as optional or visual-reference material when they would interrupt listening flow.
+
+## Book-Type Adaptation
+
+Adjust teacher mode by book type.
+
+- Fiction and literature: focus on form, symbols, moral tension, psychology, politics, and what the narrative reveals about human life.
+- History, biography, and politics: focus on argument, evidence, framing, omissions, ideology, and how the author wants the reader to judge events.
+- Philosophy, social thought, and theory: focus on claims, logic, assumptions, tensions, objections, and what follows if the argument is right.
+- Technical and knowledge books: focus on the core model, practical insight, hidden assumptions, community disagreement, and what is genuinely essential.
 
 ## Vocabulary For Listening
 
