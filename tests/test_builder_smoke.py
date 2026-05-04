@@ -98,7 +98,7 @@ class BuilderSmokeTests(unittest.TestCase):
             books / "zh.epub",
             "第一章",
             "Text/zh1.xhtml",
-            "中文正文。",
+            "动物们一齐向前冲去，谁也不再等待命令，他们知道这一刻已经不能回头。",
             **chinese_kwargs,
         )
         (project_dir / "project.json").write_text(
@@ -277,6 +277,55 @@ class BuilderSmokeTests(unittest.TestCase):
             root = Path(tmp)
             books = root / "books" / "Sample"
             project_dir = self._write_project_fixture(root)
+            (project_dir / "companion.json").write_text(
+                json.dumps(
+                    {
+                        "book": {
+                            "companion_zh": "中文导读",
+                            "summary_en": "English summary.",
+                            "references": [{"label": "Publisher page"}],
+                            "teacher_mode": {
+                                "central_thesis": {
+                                    "zh": "这本书考察语言和权力。",
+                                    "en": "This book studies language and power.",
+                                },
+                                "why_it_matters": "它解释理想如何被权力接管。",
+                                "context_frame": "放回革命政治史里理解。",
+                                "strong_interpretation": "它最强的是模式，不是单纯影射。",
+                                "blind_spots": "它压缩了复杂社会层次。",
+                                "what_to_watch": ["注意谁在解释现实。"],
+                                "questions_to_carry": ["谁在定义现实？"],
+                            },
+                        },
+                        "chapters": [
+                            {
+                                "english_label": "Chapter One",
+                                "listening_brief": {
+                                    "names": "Name",
+                                    "points": ["Listen for contrast."],
+                                    "context": "Context.",
+                                },
+                                "companion": {
+                                    "zh": "中文伴读",
+                                    "en": "English companion.",
+                                    "priority": "Read closely.",
+                                },
+                                "chinese_text": {
+                                    "mode": "generated_translation",
+                                    "content": "这是代理生成的中文译文。\n\n它应该出现在中文章节正文里。",
+                                    "reason": "image_only_source",
+                                },
+                                "vocabulary": {
+                                    "Must know": ["contrast, noun, 对比。"],
+                                    "Useful / high-value": [],
+                                    "Specialized or context-bound": [],
+                                },
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
             make_minimal_epub(
                 books / "zh.epub",
                 "第一章",
@@ -292,18 +341,14 @@ class BuilderSmokeTests(unittest.TestCase):
 
             result = build_project(project_dir, root)
 
-            self.assertIn(
-                "Chinese chapter '第一章' is image-only in the source EPUB; TTS will not read it.",
-                result.warnings,
-            )
+            self.assertNotIn("Chinese chapter '第一章' is image-only", result.warnings)
             with ZipFile(result.output_epub) as zf:
                 names = zf.namelist()
-                self.assertIn("EPUB/assets/ch01-zh-01.png", names)
-                self.assertEqual(
-                    zf.read("EPUB/assets/ch01-zh-01.png"), b"fake-image-bytes"
-                )
+                self.assertNotIn("EPUB/assets/ch01-zh-01.png", names)
                 zh_page = zf.read("EPUB/ch01-zh.xhtml").decode("utf-8")
-            self.assertIn('src="assets/ch01-zh-01.png"', zh_page)
+            self.assertIn("这是代理生成的中文译文。", zh_page)
+            self.assertIn("它应该出现在中文章节正文里。", zh_page)
+            self.assertNotIn("<img", zh_page)
 
 
 if __name__ == "__main__":

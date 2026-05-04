@@ -9,11 +9,17 @@ from zipfile import ZipFile
 from bs4 import BeautifulSoup
 from ebooklib import epub
 
-from .epub_io import extract_cover_asset, extract_href_fragment, read_container_path
+from .epub_io import (
+    assess_chinese_chapter_text,
+    extract_cover_asset,
+    extract_href_fragment,
+    read_container_path,
+)
 from .models import CompanionData, load_book_project, load_companion
 from .pairing import render_pairing_map, validate_pairings
 from .render import (
     load_css,
+    paragraphs,
     render_book_companion,
     render_chapter_pages,
     section_file_names,
@@ -148,6 +154,43 @@ def _prepare_fragment(
         return str(soup), warnings
 
 
+def _resolve_chinese_chapter_body(
+    book: epub.EpubBook,
+    chapter,
+    project,
+    pairing,
+    index: int,
+) -> tuple[str, list[str]]:
+    generated = chapter.chinese_text
+    if generated is not None and generated.mode == "generated_translation":
+        return paragraphs(generated.content), []
+
+    if project.chinese_epub is None or not pairing.chinese_href:
+        if generated is not None:
+            return paragraphs(generated.content), []
+        raise ValueError(f"Missing usable Chinese chapter for {pairing.english_label}")
+
+    chinese_fragment, chinese_warnings = _prepare_fragment(
+        book,
+        project.chinese_epub,
+        pairing.chinese_href,
+        asset_prefix=f"ch{index:02d}-zh",
+        warning_label=f"Chinese chapter '{pairing.chinese_label or pairing.english_label}'",
+    )
+
+    usability = assess_chinese_chapter_text(chinese_fragment)
+    if usability.is_usable:
+        return chinese_fragment, []
+
+    if generated is not None and generated.mode == "generated_translation":
+        return paragraphs(generated.content), []
+
+    raise ValueError(
+        f"Chinese chapter '{pairing.chinese_label or pairing.english_label}' is "
+        f"{usability.kind} and no generated translation is provided."
+    )
+
+
 def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResult:
     resolved_project_dir = Path(project_dir).resolve()
     resolved_repo_root = Path(repo_root).resolve() if repo_root is not None else None
@@ -236,18 +279,15 @@ def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResu
             asset_prefix=f"ch{index:02d}-en",
             warning_label=f"English chapter '{pairing.english_label}'",
         )
-        chinese_fragment = ""
-        chapter_warnings = list(english_warnings)
-        if project.chinese_epub is not None and pairing.chinese_href:
-            chinese_fragment, chinese_warnings = _prepare_fragment(
-                book,
-                project.chinese_epub,
-                pairing.chinese_href,
-                asset_prefix=f"ch{index:02d}-zh",
-                warning_label=f"Chinese chapter '{pairing.chinese_label or pairing.english_label}'",
-            )
-            chapter_warnings.extend(chinese_warnings)
-        warnings.extend(chapter_warnings)
+        chinese_fragment, chinese_resolution_warnings = _resolve_chinese_chapter_body(
+            book,
+            chapter,
+            project,
+            pairing,
+            index,
+        )
+        warnings.extend(english_warnings)
+        warnings.extend(chinese_resolution_warnings)
 
         rendered_pages = render_chapter_pages(
             index,
