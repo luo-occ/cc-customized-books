@@ -7,7 +7,7 @@ from zipfile import ZipFile
 
 from ebooklib import epub
 
-from .epub_io import extract_href_fragment, read_container_path
+from .epub_io import extract_cover_asset, extract_href_fragment, read_container_path
 from .models import CompanionData, load_book_project, load_companion
 from .pairing import render_pairing_map, validate_pairings
 from .render import (
@@ -136,6 +136,21 @@ def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResu
     book.add_author(project.author)
     if project.description:
         book.add_metadata("DC", "description", project.description)
+    warnings: list[str] = []
+
+    cover_asset = extract_cover_asset(project.english_epub)
+    cover_source = project.english_epub
+    if cover_asset is None and project.chinese_epub is not None:
+        cover_asset = extract_cover_asset(project.chinese_epub)
+        cover_source = project.chinese_epub
+    if cover_asset is not None:
+        book.set_cover(
+            _normalize_extract_href(cover_source, cover_asset.href),
+            cover_asset.content,
+            create_page=False,
+        )
+    else:
+        warnings.append("No extractable cover found in English or Chinese source EPUBs.")
 
     css_item = epub.EpubItem(
         uid="style_main",
@@ -238,5 +253,5 @@ def build_project(project_dir: Path, repo_root: Path | None = None) -> BuildResu
     return BuildResult(
         output_epub=project.output_epub,
         pairing_map=project.pairing_map,
-        warnings=[],
+        warnings=warnings,
     )
