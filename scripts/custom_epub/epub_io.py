@@ -17,6 +17,8 @@ OPF_NAMESPACES = {"opf": "http://www.idpf.org/2007/opf"}
 NCX_NAMESPACES = {"ncx": "http://www.daisy.org/z3986/2005/ncx/"}
 XHTML_MEDIA_TYPE = "application/xhtml+xml"
 NCX_MEDIA_TYPE = "application/x-dtbncx+xml"
+IMAGE_MEDIA_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
+COVER_HINTS = ("cover", "cover-image", "front-cover", "titlepage")
 
 
 @dataclass(frozen=True)
@@ -40,6 +42,13 @@ class EpubStructure:
         return self.nav
 
 
+@dataclass(frozen=True)
+class CoverAsset:
+    href: str
+    media_type: str
+    content: bytes
+
+
 def read_container_path(zf: ZipFile) -> str:
     container_xml = zf.read(CONTAINER_PATH)
     root = ET.fromstring(container_xml)
@@ -56,18 +65,8 @@ def load_epub_structure(epub_path: str | Path) -> EpubStructure:
     with ZipFile(epub_path) as zf:
         opf_path = read_container_path(zf)
         opf_root = ET.fromstring(zf.read(opf_path))
-        manifest = {}
         opf_dir = posixpath.dirname(opf_path)
-
-        for item in opf_root.findall("opf:manifest/opf:item", OPF_NAMESPACES):
-            item_id = item.attrib.get("id")
-            href = item.attrib.get("href")
-            if not item_id or not href:
-                continue
-            manifest[item_id] = {
-                "href": _resolve_opf_href(opf_dir, href),
-                "media_type": item.attrib.get("media-type", ""),
-            }
+        manifest = _load_manifest(opf_root, opf_dir)
 
         spine = opf_root.find("opf:spine", OPF_NAMESPACES)
         if spine is None:
@@ -85,6 +84,37 @@ def load_epub_structure(epub_path: str | Path) -> EpubStructure:
             nav_entries = _load_ncx_entries(zf, ncx_path)
 
     return EpubStructure(opf_path=opf_path, spine=spine_hrefs, nav=nav_entries)
+
+
+def extract_cover_asset(epub_path: str | Path) -> CoverAsset | None:
+    epub_path = Path(epub_path)
+    with ZipFile(epub_path) as zf:
+        opf_path = read_container_path(zf)
+        opf_root = ET.fromstring(zf.read(opf_path))
+        opf_dir = posixpath.dirname(opf_path)
+        manifest = _load_manifest(opf_root, opf_dir)
+
+        explicit_cover_id = _find_metadata_cover_id(opf_root)
+        if explicit_cover_id:
+            cover = _cover_from_manifest(zf, manifest, explicit_cover_id)
+            if cover is not None:
+                return cover
+
+        for item_id, item in manifest.items():
+            if "cover-image" in _item_properties(item):
+                cover = _cover_from_manifest(zf, manifest, item_id)
+                if cover is not None:
+                    return cover
+
+        heuristic_cover = _find_cover_like_manifest_item(zf, manifest)
+        if heuristic_cover is not None:
+            return heuristic_cover
+
+        spine = opf_root.find("opf:spine", OPF_NAMESPACES)
+        if spine is not None:
+            return _find_frontmatter_cover(zf, manifest, spine)
+
+    return None
 
 
 def clean_body_fragment(raw: str) -> str:
@@ -131,16 +161,134 @@ def _resolve_opf_href(opf_dir: str, href: str) -> str:
     return posixpath.normpath(posixpath.join(opf_dir, href))
 
 
-def _find_ncx_path(spine: ET.Element, manifest: dict[str, dict[str, str]]) -> str | None:
+def _load_manifest(
+    opf_root: ET.Element, opf_dir: str
+) -> dict[str, dict[str, str | set[str]]]:
+    manifest: dict[str, dict[str, str | set[str]]] = {}
+    for item in opf_root.findall("opf:manifest/opf:item", OPF_NAMESPACES):
+        item_id = item.attrib.get("id")
+        href = item.attrib.get("href")
+        if not item_id or not href:
+            continue
+        manifest[item_id] = {
+            "href": _resolve_opf_href(opf_dir, href),
+            "media_type": item.attrib.get("media-type", ""),
+            "properties": set(item.attrib.get("properties", "").split()),
+        }
+    return manifest
+
+
+def _find_metadata_cover_id(opf_root: ET.Element) -> str | None:
+    metadata = opf_root.find("opf:metadata", OPF_NAMESPACES)
+    if metadata is None:
+        return None
+
+    for node in metadata.findall("opf:meta", OPF_NAMESPACES):
+        if node.attrib.get("name") == "cover":
+            return node.attrib.get("content")
+    return None
+
+
+def _cover_from_manifest(
+    zf: ZipFile,
+    manifest: dict[str, dict[str, str | set[str]]],
+    item_id: str,
+) -> CoverAsset | None:
+    item = manifest.get(item_id)
+    if item is None:
+        return None
+
+    media_type = _item_media_type(item)
+    if media_type not in IMAGE_MEDIA_TYPES:
+        return None
+
+    href = _item_href(item)
+    return CoverAsset(href=href, media_type=media_type, content=zf.read(href))
+
+
+def _find_cover_like_manifest_item(
+    zf: ZipFile, manifest: dict[str, dict[str, str | set[str]]]
+) -> CoverAsset | None:
+    for item_id, item in manifest.items():
+        media_type = _item_media_type(item)
+        if media_type not in IMAGE_MEDIA_TYPES:
+            continue
+        if _is_cover_like(item_id, _item_href(item)):
+            return _cover_from_manifest(zf, manifest, item_id)
+    return None
+
+
+def _find_frontmatter_cover(
+    zf: ZipFile,
+    manifest: dict[str, dict[str, str | set[str]]],
+    spine: ET.Element,
+) -> CoverAsset | None:
+    itemrefs = spine.findall("opf:itemref", OPF_NAMESPACES)
+    for itemref in itemrefs[:3]:
+        content_item = manifest.get(itemref.attrib.get("idref", ""))
+        if content_item is None:
+            continue
+        if _item_media_type(content_item) != XHTML_MEDIA_TYPE:
+            continue
+
+        content_href = _item_href(content_item)
+        soup = BeautifulSoup(zf.read(content_href).decode("utf-8"), "html.parser")
+        for image in soup.find_all("img"):
+            src = image.get("src", "").strip()
+            if not src:
+                continue
+            image_href = _resolve_relative_href(posixpath.dirname(content_href), src)
+            cover = _cover_from_href(zf, manifest, image_href)
+            if cover is not None:
+                return cover
+    return None
+
+
+def _cover_from_href(
+    zf: ZipFile,
+    manifest: dict[str, dict[str, str | set[str]]],
+    href: str,
+) -> CoverAsset | None:
+    for item in manifest.values():
+        if _item_href(item) != href:
+            continue
+        media_type = _item_media_type(item)
+        if media_type not in IMAGE_MEDIA_TYPES:
+            return None
+        return CoverAsset(href=href, media_type=media_type, content=zf.read(href))
+    return None
+
+
+def _is_cover_like(item_id: str, href: str) -> bool:
+    haystack = f"{item_id} {posixpath.basename(href)}".lower()
+    return any(hint in haystack for hint in COVER_HINTS)
+
+
+def _item_href(item: dict[str, str | set[str]]) -> str:
+    return str(item["href"])
+
+
+def _item_media_type(item: dict[str, str | set[str]]) -> str:
+    return str(item["media_type"])
+
+
+def _item_properties(item: dict[str, str | set[str]]) -> set[str]:
+    properties = item.get("properties", set())
+    return properties if isinstance(properties, set) else set()
+
+
+def _find_ncx_path(
+    spine: ET.Element, manifest: dict[str, dict[str, str | set[str]]]
+) -> str | None:
     toc_id = spine.attrib.get("toc")
     if toc_id:
         item = manifest.get(toc_id)
         if item is not None:
-            return item["href"]
+            return _item_href(item)
 
     for item in manifest.values():
-        if item["media_type"] == NCX_MEDIA_TYPE:
-            return item["href"]
+        if _item_media_type(item) == NCX_MEDIA_TYPE:
+            return _item_href(item)
     return None
 
 

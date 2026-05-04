@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import tempfile
 import unittest
 from pathlib import Path
@@ -5,6 +7,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 
 from custom_epub.epub_io import (
     clean_body_fragment,
+    extract_cover_asset,
     extract_href_fragment,
     load_epub_structure,
     read_container_path,
@@ -25,6 +28,7 @@ CONTENT_OPF = """<?xml version="1.0" encoding="UTF-8"?>
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:title>Fixture Book</dc:title>
     <dc:language>en</dc:language>
+    <meta name="cover" content="cover"/>
   </metadata>
   <manifest>
     <item id="ncx" href="Nav/toc.ncx" media-type="application/x-dtbncx+xml"/>
@@ -36,6 +40,26 @@ CONTENT_OPF = """<?xml version="1.0" encoding="UTF-8"?>
     <itemref idref="cover"/>
     <itemref idref="c1"/>
     <itemref idref="c2"/>
+  </spine>
+</package>
+"""
+
+
+CONTENT_OPF_FRONTMATTER = """<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" unique-identifier="bookid" xmlns="http://www.idpf.org/2007/opf">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:title>Fixture Book</dc:title>
+    <dc:language>en</dc:language>
+  </metadata>
+  <manifest>
+    <item id="ncx" href="Nav/toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="title" href="Text/titlepage.xhtml" media-type="application/xhtml+xml"/>
+    <item id="c1" href="Text/ch1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="front-cover" href="Images/front-cover.png" media-type="image/png"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="title"/>
+    <itemref idref="c1"/>
   </spine>
 </package>
 """
@@ -88,18 +112,51 @@ CHAPTER_TWO = """<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
+TITLEPAGE = """<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
+    <div class="cover">
+      <img src="../Images/front-cover.png" alt="Cover"/>
+    </div>
+  </body>
+</html>
+"""
+
+
 class EpubIoTests(unittest.TestCase):
-    def _build_epub(self, root: Path) -> Path:
+    def _build_epub(
+        self,
+        root: Path,
+        *,
+        content_opf: str = CONTENT_OPF,
+        extra_files: dict[str, str | bytes] | None = None,
+    ) -> Path:
         epub_path = root / "fixture.epub"
+        files: dict[str, str | bytes] = {
+            "mimetype": "application/epub+zip",
+            "META-INF/container.xml": CONTAINER_XML,
+            "OPS/content.opf": content_opf,
+            "OPS/Nav/toc.ncx": TOC_NCX,
+            "OPS/Text/ch1.xhtml": CHAPTER_ONE,
+            "OPS/Text/ch2.xhtml": CHAPTER_TWO,
+            "OPS/Images/cover.jpg": b"jpeg-bytes",
+        }
+        if extra_files is not None:
+            files.update(extra_files)
         with ZipFile(epub_path, "w", compression=ZIP_DEFLATED) as zf:
-            zf.writestr("mimetype", "application/epub+zip")
-            zf.writestr("META-INF/container.xml", CONTAINER_XML)
-            zf.writestr("OPS/content.opf", CONTENT_OPF)
-            zf.writestr("OPS/Nav/toc.ncx", TOC_NCX)
-            zf.writestr("OPS/Text/ch1.xhtml", CHAPTER_ONE)
-            zf.writestr("OPS/Text/ch2.xhtml", CHAPTER_TWO)
-            zf.writestr("OPS/Images/cover.jpg", b"jpeg-bytes")
+            for path, content in files.items():
+                zf.writestr(path, content)
         return epub_path
+
+    def _build_frontmatter_cover_epub(self, root: Path) -> Path:
+        return self._build_epub(
+            root,
+            content_opf=CONTENT_OPF_FRONTMATTER,
+            extra_files={
+                "OPS/Text/titlepage.xhtml": TITLEPAGE,
+                "OPS/Images/front-cover.png": b"png-bytes",
+            },
+        )
 
     def test_read_container_path_finds_rootfile(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -176,6 +233,28 @@ class EpubIoTests(unittest.TestCase):
                 "Fragment 'missing' not found in OPS/Text/ch2.xhtml",
             ):
                 extract_href_fragment(epub_path, "Text/ch2.xhtml#missing")
+
+    def test_extract_cover_asset_uses_explicit_metadata_cover(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            epub_path = self._build_epub(Path(tmp))
+
+            cover = extract_cover_asset(epub_path)
+
+            self.assertIsNotNone(cover)
+            self.assertEqual(cover.href, "OPS/Images/cover.jpg")
+            self.assertEqual(cover.media_type, "image/jpeg")
+            self.assertEqual(cover.content, b"jpeg-bytes")
+
+    def test_extract_cover_asset_falls_back_to_frontmatter_image(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            epub_path = self._build_frontmatter_cover_epub(Path(tmp))
+
+            cover = extract_cover_asset(epub_path)
+
+            self.assertIsNotNone(cover)
+            self.assertEqual(cover.href, "OPS/Images/front-cover.png")
+            self.assertEqual(cover.media_type, "image/png")
+            self.assertEqual(cover.content, b"png-bytes")
 
 
 if __name__ == "__main__":
