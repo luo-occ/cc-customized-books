@@ -1,0 +1,393 @@
+{
+  "book": {
+    "companion_zh": "《Thinking in Bets》表面上借扑克讲决策，真正关心的是一个更日常、也更痛苦的问题：我们怎样在信息不完整、结果带有运气、别人又会事后评判我们的世界里，仍然学会做更好的判断。\n\n这本书的重要性不在于教你下注，也不在于把人生简化成赌博。安妮·杜克的核心贡献，是把“决策质量”和“结果好坏”拆开。一个好决定可能因为运气坏而失败，一个坏决定也可能因为运气好而成功。如果我们只根据结果回头评价自己，就会在赢的时候学到傲慢，在输的时候学到错误的自责。这种把结果倒推成原因的习惯，书里称为 resulting。\n\n作者背景很关键。杜克先受过认知心理学训练，后来成为职业扑克选手，再转向决策教育和企业咨询。这个组合让她的写法介于行为科学、牌桌经验和管理建议之间。她不是从纯理论出发，而是从一个必须不断在不确定性中下注、复盘、控制情绪的场域出发。扑克在这里是一台显微镜：它把运气、隐藏信息、对手行为、情绪波动和概率判断压缩到同一张桌子上。\n\n阅读这本书时，要抓住三条主线。第一，人生更像扑克，不像象棋。很多重要选择都没有完整信息，也没有立刻可验证的标准答案。第二，信念不是被动存储的事实，而是会影响我们下注的心理资产；我们会保护旧信念，筛选证据，并把聪明才智用来替自己辩护。第三，个人意志不够可靠，所以需要制度化的反省工具：愿意说“我不确定”，找能挑战自己的小组，用 CUDOS 这类规范保护真诚异议，用预先承诺、反向回顾和预演失败来约束未来的自己。\n\n这本书的局限也值得带着听。它非常擅长把决策偏误变成可操作的习惯，但有时会把结构性问题、权力差异和道德冲突压缩成个人判断问题。不是每一个坏结果都能靠更好校准解决；有些场景里，信息本身被垄断，激励本身被扭曲，或者弱者没有下注空间。最好的读法不是把书当成万能方法论，而是把它当成一套反自欺工具。\n\n对你来说，最有价值的听法是：先听中文建立模型，再听词汇，最后听英文原章时专门追踪几个英文关键词：resulting, uncertainty, bet, belief, calibration, accountability, dissent, premortem。不要急着记住每个故事细节。更重要的是听出每个故事在训练哪一种思维动作：把结果和过程分开，把信念改写成概率，把争论改写成可下注的问题，把后悔提前放到决策之前。\n\n建议节奏：第一天听前言和第一章，建立“扑克不是象棋”的基本框架；第二天听第二章，练习把观点改写成 wager；第三天听第三章，专门处理复盘和运气；第四天听第四、五章，关注高质量小组和异议；第五天听第六章，把书里的工具转成自己的决策清单。",
+    "summary_en": "Thinking in Bets is a practical book about decision-making under uncertainty. Annie Duke uses poker not as a gambling manual, but as a disciplined way to separate decision quality from outcome quality, update beliefs, invite dissent, and prepare future selves for pressure. The strongest reading is that the book teaches anti-self-deception habits; the main limitation is that it sometimes treats structural or moral problems as if they were mainly calibration problems.",
+    "teacher_mode": {
+      "central_thesis": {
+        "zh": "这本书最有价值的判断是：成熟的决策者不是更确定的人，而是更会和不确定性相处的人。他们把信念当成可更新的概率，把结果当成带噪声的反馈，把反对意见当成提升判断的燃料。",
+        "en": "The mature decision-maker is not more certain, but better at living with uncertainty: beliefs become updateable probabilities, outcomes become noisy feedback, and dissent becomes fuel for judgment."
+      },
+      "why_it_matters": "它训练的是一种罕见能力：在输赢、面子、后悔和群体压力都很强的时候，仍然尽量不骗自己。",
+      "context_frame": "把它放在行为经济学、认知心理学、扑克中的不完整信息博弈、管理决策和现代 decision education 的交汇处来读。它和 Kahneman、Tversky、Tetlock、Merton 的科学共同体规范，以及企业中的复盘文化都有关系。",
+      "strong_interpretation": "我会把这本书读成一本“反结果崇拜”的训练手册。它反对的不是结果，而是用结果偷懒：赢了就证明自己聪明，输了就证明自己愚蠢。杜克要读者把学习重新放回过程、概率和证据里。",
+      "blind_spots": "这套方法对个人、团队和投资决策很有帮助，但它不是完整的伦理学或政治经济学。面对不公平规则、信息操纵或权力不对称时，只说“校准概率”可能不够。",
+      "what_to_watch": [
+        "注意 resulting 如何反复出现：人们用已经发生的结果倒推决策好坏。",
+        "注意作者怎样把强烈观点改写成带概率的赌注。",
+        "注意小组、异议和预先承诺这些工具，都是为了保护未来的自己不被当下情绪劫持。",
+        "注意每章都在处理一种自欺：事后聪明、确认偏误、自利性归因、群体舒适、短期情绪。"
+      ],
+      "questions_to_carry": [
+        "我最近一次因为结果好就高估自己，或因为结果坏就错怪自己的事情是什么？",
+        "如果我必须给一个信念标概率，而不是说“我确定”，我会怎样改变表达？",
+        "我身边有没有一个真正奖励准确性、允许异议的小组？",
+        "哪些人生问题不是更会下注就能解决的？"
+      ]
+    },
+    "references": [
+      {
+        "label": "Penguin Random House publisher page"
+      },
+      {
+        "label": "Annie Duke official site"
+      },
+      {
+        "label": "Alliance for Decision Education biography"
+      },
+      {
+        "label": "Alliance for Decision Education overview"
+      },
+      {
+        "label": "Selected bibliography in the English source edition"
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "english_label": "Introduction: Why This Isn't a Poker Book",
+      "key_chapter": false,
+      "listening_brief": {
+        "names": "Annie Duke (AN-ee dook), University of Pennsylvania, cognitive psychology, Montana, poker.",
+        "points": [
+          "听作者如何把一次人生转向，变成理解不确定性的入口。",
+          "注意她反复澄清：扑克只是模型，不是本书目的。",
+          "抓住两个关键词：uncertainty 和 decision quality。",
+          "The introduction sets up the promise that better thinking can be trained."
+        ],
+        "context": "前言是作者可信度的建立：她先是心理学训练者，后来在扑克桌上被迫每天面对信息不足和结果噪声。"
+      },
+      "companion": {
+        "zh": "前言的任务，是避免读者误会这本书是扑克技巧书。杜克把自己的学术训练、疾病中断、搬到蒙大拿、进入扑克世界这些经历串起来，是为了说明她为什么会把决策看成一种可以训练的实践。\n\n这里最重要的不是故事本身，而是身份转换：她从研究心理的人，变成必须在现实压力下管理心理的人。牌桌给她的不是神秘直觉，而是持续复盘、承认不确定、接受坏结果仍可能来自好决策的训练环境。",
+        "en": "The introduction frames poker as a laboratory for uncertainty. Duke wants the reader to see decision-making as a trainable practice, not a talent reserved for gamblers or experts.",
+        "priority": "Read closely enough to understand the author's authority and why poker is a useful but limited metaphor."
+      },
+      "vocabulary": {
+        "Must know": [
+          "uncertainty, noun, 不确定性. The central condition of the book: you rarely know all the facts before deciding.",
+          "decision quality, phrase, 决策质量. It means judging the process, not only the result.",
+          "cognitive psychology, noun phrase, 认知心理学. Duke's academic background; listen for how it supports the poker examples."
+        ],
+        "Useful / high-value": [
+          "graduate, verb or noun, 毕业；研究生. Useful here because Duke describes an academic path before poker.",
+          "academic, adjective or noun, 学术的；学者. This word marks the contrast between university training and practical decision pressure.",
+          "mapped out, phrase, 规划好了. A spoken expression for believing the future path is already clear."
+        ],
+        "Specialized or context-bound": [
+          "fellowship, noun, 奖学金；研究资助. In this chapter it signals academic promise and institutional recognition.",
+          "tournament, noun, 锦标赛. A poker and sports word that returns throughout the book."
+        ]
+      },
+      "recap": {
+        "zh": "前言告诉你：本书不是关于扑克，而是关于人在不知道全部事实时怎样训练判断。扑克只是把不确定性放大的场景。",
+        "en": "The introduction turns poker into a model for learning under uncertainty."
+      }
+    },
+    {
+      "english_label": "Chapter 1: Life Is Poker, Not Chess",
+      "key_chapter": true,
+      "listening_brief": {
+        "names": "Pete Carroll (peet KAIR-uhl), Seattle Seahawks, New England Patriots, Super Bowl XLIX, Marshawn Lynch, Malcolm Butler, John von Neumann.",
+        "points": [
+          "听 Pete Carroll 的例子：坏结果不一定证明决定愚蠢。",
+          "注意 resulting 这个核心概念：用结果反推决策质量。",
+          "区分 chess 和 poker：完整信息与不完整信息。",
+          "Listen for “I’m not sure” as a strength, not a weakness."
+        ],
+        "context": "这一章搭建全书主模型：人生里的大多数选择更像扑克，有隐藏信息、运气和概率；不像象棋那样有完整棋盘和可计算的最优走法。"
+      },
+      "companion": {
+        "zh": "第一章用超级碗争议开场，是非常聪明的写法。体育评论天然容易诱发事后聪明：结果一坏，所有人都觉得自己早就知道。杜克借这个例子拆开两个问题：当时的信息下，这个决定是否合理？事后发生的坏结果，究竟能证明多少？\n\n本章真正建立的是全书的反射动作：遇到结果时，不要立刻把它变成道德审判或智力审判。先问过程、信息、概率和替代方案。扑克与象棋的对比不是为了贬低象棋，而是提醒我们：生活里很少有完全可见的棋盘。",
+        "en": "Chapter 1 attacks resulting: the habit of judging a decision only by its outcome. The poker-versus-chess contrast gives the book its central model for uncertain life decisions.",
+        "priority": "Read very closely. This chapter defines the book's basic vocabulary and the habit it wants to break."
+      },
+      "mini_lecture": {
+        "chapter_thesis": "A good decision and a good outcome are related, but not identical.",
+        "why_pivotal": "Without this distinction, the rest of the book collapses. You cannot learn well if every win flatters you and every loss humiliates you.",
+        "deeper_interpretation": "The chapter is really about humility. Saying “I’m not sure” is not indecision; it is the first step toward more accurate learning.",
+        "rival_reading": "A skeptic might say Duke risks excusing bad decisions by blaming luck. The useful answer is that she is not removing accountability; she is relocating it from results to process.",
+        "questions_to_carry": [
+          "What information was available at the moment of decision?",
+          "What range of outcomes was possible before the result arrived?",
+          "Am I judging this decision, or just reacting to the emotional force of the result?"
+        ]
+      },
+      "vocabulary": {
+        "Must know": [
+          "resulting, noun, 结果导向式倒推. In poker language, it means judging decision quality only from the outcome.",
+          "outcome, noun, 结果. A neutral word; the book asks you not to confuse outcome with process.",
+          "uncertainty, noun, 不确定性. The condition that makes betting-thinking necessary.",
+          "probability, noun, 概率. Listen for it as a disciplined alternative to certainty."
+        ],
+        "Useful / high-value": [
+          "contrarian, adjective or noun, 逆向的；持相反意见的人. Useful for describing people who resist common judgment.",
+          "haphazard, adjective, 随意的，无计划的. It describes action without a reliable process.",
+          "susceptible, adjective, 易受影响的. Often used with “to,” as in susceptible to bias.",
+          "vague, adjective, 模糊的. Important when a belief is too unclear to test."
+        ],
+        "Specialized or context-bound": [
+          "two-minute warning, noun phrase, 两分钟警告. An American football timing rule; you only need the rough sense of late-game pressure.",
+          "Monday morning quarterback, idiom, 事后诸葛亮. Someone who criticizes a decision after knowing the result.",
+          "game theory, noun phrase, 博弈论. A field for analyzing strategic decisions, especially when others' choices matter."
+        ]
+      },
+      "recap": {
+        "zh": "第一章的核心是：人生不像象棋那样信息完整，更像扑克。不要用结果偷懒，要把判断放回当时的信息、概率和过程里。",
+        "en": "Life is poker, not chess: learn from decisions by separating process from noisy outcomes."
+      }
+    },
+    {
+      "english_label": "Chapter 2: Wanna Bet?",
+      "key_chapter": true,
+      "listening_brief": {
+        "names": "John Hennigan, Johnny World, Des Moines (duh MOYN), David Letterman, Bertrand Russell.",
+        "points": [
+          "听“Wanna bet?”怎样把空泛观点变成可检验承诺。",
+          "注意信念形成的路径：很多信念不是先验证再相信，而是先听到就相信。",
+          "抓住 confidence 的重新定义：不是装作确定，而是知道自己有多不确定。",
+          "Watch how smart people can become better at defending bad beliefs."
+        ],
+        "context": "第二章把决策推进到信念层面：每个选择都是对未来的下注，而下注质量取决于你背后的信念质量。"
+      },
+      "companion": {
+        "zh": "这一章从 John Hennigan 的荒唐赌约讲起，但目标不是赞美冒险精神。杜克真正要读者练的是一种语言动作：当你说“我认为 X”时，能不能把它改写成“我愿意用多大概率、多大代价，押 X 为真”。\n\n本章也更尖锐地处理信念。我们常以为自己先分析证据再形成信念，其实很多信念是先进入头脑，再由大脑寻找证据保护它。越聪明的人，越可能更擅长替错误信念辩护。因此，“赌一把？”不是挑衅，而是一种把信念从自我形象中拿出来、放到公共检验中的方法。",
+        "en": "Chapter 2 turns beliefs into bets. The question “Wanna bet?” forces vague confidence into testable probability and exposes how easily beliefs become protected possessions.",
+        "priority": "Read closely. This is the chapter that changes how you should phrase opinions."
+      },
+      "mini_lecture": {
+        "chapter_thesis": "Beliefs are bets on what is true, and every decision spends those beliefs.",
+        "why_pivotal": "The book moves from outcomes to the machinery behind decisions: belief formation, confidence, and self-protection.",
+        "deeper_interpretation": "The chapter is a lesson in intellectual hygiene. If a belief cannot survive being priced as a bet, maybe it was never as solid as it felt.",
+        "rival_reading": "A rival view is that not every belief should be marketized or turned into a wager. That is fair; the best use of the question is diagnostic, not literal gambling.",
+        "questions_to_carry": [
+          "What probability would I assign to this belief?",
+          "What evidence would make me lower that probability?",
+          "Am I protecting truth, or protecting my identity as a smart person?"
+        ]
+      },
+      "vocabulary": {
+        "Must know": [
+          "belief, noun, 信念. In this chapter beliefs are not passive opinions; they guide bets and decisions.",
+          "wager, noun or verb, 赌注；下注. A formal word for bet, useful in decision contexts.",
+          "calibrate, verb, 校准. To adjust confidence so it matches reality more closely.",
+          "confidence, noun, 信心；确定程度. Duke redefines it as knowing the limits of what you know."
+        ],
+        "Useful / high-value": [
+          "plausible, adjective, 貌似合理的. A claim can sound plausible before it is actually well supported.",
+          "inherent, adjective, 内在的，固有的. Often used for qualities built into a situation.",
+          "eccentric, adjective, 古怪的. Useful for Hennigan's personality and many narrative examples.",
+          "proposition, noun, 命题；提议. In betting contexts, it can mean the claim being bet on."
+        ],
+        "Specialized or context-bound": [
+          "confirmation bias, noun phrase, 确认偏误. The tendency to favor evidence that supports what we already believe.",
+          "Des Moines, proper noun, 得梅因. A city in Iowa; here it matters because the bet is intentionally uncomfortable.",
+          "Bayesian, adjective, 贝叶斯式的. Not always named, but the chapter's spirit is updating beliefs as evidence changes."
+        ]
+      },
+      "recap": {
+        "zh": "第二章把观点变成赌注。真正的信心不是大声说“我确定”，而是能诚实说明自己有多大把握，以及什么证据会改变自己。",
+        "en": "The chapter teaches you to price beliefs as bets and to treat confidence as calibration."
+      }
+    },
+    {
+      "english_label": "Chapter 3: Bet to Learn: Fielding the Unfolding Future",
+      "key_chapter": true,
+      "listening_brief": {
+        "names": "Nick the Greek, Crystal Lounge, SnackWell's, Phil Hellmuth.",
+        "points": [
+          "听结果怎样成为反馈，但不是简单答案。",
+          "注意 luck 和 skill 的区分：复盘最难的就是给两者分配权重。",
+          "抓住 self-serving bias：赢了归功于自己，输了怪运气。",
+          "This chapter is about learning without lying to yourself."
+        ],
+        "context": "第三章处理复盘。结果当然重要，但结果是混合信号：里面同时有技能、运气、对手行为、外部条件和我们看不见的变量。"
+      },
+      "companion": {
+        "zh": "本章的难点，是它要求你同时避免两种偷懒。第一种是完全忽略结果，仿佛过程好就什么都不用改。第二种是过度崇拜结果，仿佛结果已经把原因讲清楚了。杜克要的是第三条路：把结果当成反馈，但承认反馈里有噪声。\n\n“运气与技能”的区分非常实用，也非常危险。实用在于它能保护你不被偶然输赢带偏；危险在于人很容易自利地分配：我的成功是技能，你的成功是运气；我的失败是运气，你的失败是无能。读这一章时，要把矛头先指向自己。",
+        "en": "Chapter 3 is about extracting learning from noisy outcomes. Duke asks us to treat results as feedback while resisting the self-serving temptation to assign luck and skill in whatever way flatters us.",
+        "priority": "Read closely. This chapter is the bridge between better language and better learning."
+      },
+      "mini_lecture": {
+        "chapter_thesis": "Outcomes are data, but they are noisy data.",
+        "why_pivotal": "If you cannot interpret feedback well, every later tool becomes cosmetic.",
+        "deeper_interpretation": "The deepest lesson is moral as much as cognitive: honest learning requires giving up the pleasure of always being the hero of your own explanation.",
+        "rival_reading": "One could object that too much luck-talk weakens responsibility. The stronger version of Duke's argument is that responsibility means improving attribution, not pretending luck does not exist.",
+        "questions_to_carry": [
+          "What part of this outcome was probably skill?",
+          "What part might be luck or hidden context?",
+          "Would I explain the same result differently if it happened to someone I disliked?"
+        ]
+      },
+      "vocabulary": {
+        "Must know": [
+          "feedback, noun, 反馈. Information from results that can help improve future decisions.",
+          "luck, noun, 运气. Random or uncontrolled factors that affect outcomes.",
+          "skill, noun, 技能. Repeatable ability that improves decision quality over time.",
+          "attribution, noun, 归因. The explanation you assign to why something happened."
+        ],
+        "Useful / high-value": [
+          "ambiguity, noun, 模糊性，歧义. Useful for mixed signals and unclear evidence.",
+          "fraught, adjective, 充满问题或紧张的. A strong word for emotionally loaded situations.",
+          "gauge, verb, 估计，衡量. To judge the size, level, or quality of something.",
+          "plausible, adjective, 貌似合理的. Many wrong explanations feel plausible after the fact."
+        ],
+        "Specialized or context-bound": [
+          "self-serving bias, noun phrase, 自利性偏误. The tendency to explain events in ways that protect the ego.",
+          "fielding outcomes, phrase, 接住并处理结果. Duke uses a sports-like image: outcomes come at you, and you must handle them well.",
+          "redux, adjective or noun, 回归版；再现. Usually appears after a topic returns in a new form."
+        ]
+      },
+      "recap": {
+        "zh": "第三章教你复盘：结果是反馈，但不是判决书。真正难的是诚实地区分技能、运气和自我辩护。",
+        "en": "Results teach, but only if we handle the noisy mix of luck, skill, and ego honestly."
+      }
+    },
+    {
+      "english_label": "Chapter 4: The Buddy System",
+      "key_chapter": false,
+      "listening_brief": {
+        "names": "Lauren Conrad, David Letterman, The Matrix, Heterodox Academy, Robert K. Merton.",
+        "points": [
+          "听作者为什么不相信个人靠意志就能持续理性。",
+          "注意好小组的功能：奖励准确性，而不是奖励舒服或忠诚。",
+          "抓住 accountability 和 diversity of viewpoints。",
+          "The chapter shifts from individual thinking to social design."
+        ],
+        "context": "第四章告诉你：要想减少自欺，不能只靠内心修养，还要靠外部小组和规则。"
+      },
+      "companion": {
+        "zh": "这一章从“也许问题在你自己”开始，语气有点刺耳，但方向是建设性的。杜克认为，我们自己很难稳定地发现自己的盲点，因为大脑太擅长保护自尊。所以需要一个 buddy system：不是普通朋友圈，而是能把准确性放在面子前面的同伴系统。\n\n好小组有三个功能。它让你对说法负责，迫使你解释证据；它引入不同视角，打断确认偏误；它建立共同规范，让反对意见不是背叛，而是合作。这里的重点不是“多找人聊天”，而是设计一种会奖励真话的关系。",
+        "en": "Chapter 4 argues that better judgment is socially scaffolded. We need groups that reward accuracy, accountability, and viewpoint diversity rather than comfort or loyalty.",
+        "priority": "Read at a steady pace. The examples matter less than the criteria for a good decision group."
+      },
+      "vocabulary": {
+        "Must know": [
+          "accountability, noun, 责任性；可问责性. Being expected to explain and defend your reasoning.",
+          "diversity of viewpoints, phrase, 观点多样性. Different perspectives that help expose blind spots.",
+          "accuracy, noun, 准确性. The group should reward getting closer to truth, not winning status.",
+          "confirmatory drift, noun phrase, 确认性漂移. A group slowly moves toward shared bias if it lacks challenge."
+        ],
+        "Useful / high-value": [
+          "conformity, noun, 从众. Pressure to align with group opinion.",
+          "drift, noun or verb, 漂移，逐渐偏离. Important for slow unnoticed movement in group judgment.",
+          "heterogeneous, adjective, 多样混合的. A useful word for groups with different backgrounds or views.",
+          "exacerbate, verb, 加剧. To make a problem worse."
+        ],
+        "Specialized or context-bound": [
+          "red pill, noun phrase, 红药丸. A pop-culture reference from The Matrix, meaning choosing uncomfortable truth.",
+          "Heterodox Academy, proper noun, 异端学会. An organization used as an example of viewpoint diversity.",
+          "buddy system, noun phrase, 伙伴制. Here it means a structured support system for better thinking."
+        ]
+      },
+      "recap": {
+        "zh": "第四章把决策从个人脑子移到社会环境：你需要能挑战你的人，也需要一套让挑战变得正常的规则。",
+        "en": "Good decision-making needs social architecture: accountability, accuracy, and diverse challenge."
+      }
+    },
+    {
+      "english_label": "Chapter 5: Dissent to Win",
+      "key_chapter": true,
+      "listening_brief": {
+        "names": "Robert K. Merton, CUDOS, communism, universalism, disinterestedness, organized skepticism.",
+        "points": [
+          "听 CUDOS 四个规范怎样把科学共同体变成决策小组的模型。",
+          "注意 dissent 在这里不是情绪化反对，而是为了赢得更准确判断。",
+          "抓住 disinterestedness：每个人都有利益冲突，所以规则必须帮助我们承认它。",
+          "This chapter is the book's strongest argument for disciplined disagreement."
+        ],
+        "context": "第五章把前一章的小组思想制度化。好小组不是靠“大家人好”，而是靠规范保护异议、证据和准确性。"
+      },
+      "companion": {
+        "zh": "本章借社会学家 Robert K. Merton 的科学规范 CUDOS，给“好决策小组”一个更硬的框架。Communism 在这里不是政治制度，而是知识共享；Universalism 是不因人废言；Disinterestedness 是承认人都有私利，所以要防止私利污染判断；Organized skepticism 是把怀疑组织成友好的、可持续的实践。\n\n这章特别适合反复听，因为它纠正了一个常见误会：异议不是破坏气氛，前提是异议服务于准确性，而不是服务于自我表现。真正成熟的小组，会让成员既敢说“你可能错了”，也愿意听见“我可能错了”。",
+        "en": "Chapter 5 uses Merton's CUDOS norms to define disciplined dissent. The goal is not argument for its own sake, but a group culture that protects evidence from status, ego, and hidden incentives.",
+        "priority": "Read closely. This chapter gives the clearest checklist for building a truth-seeking group."
+      },
+      "mini_lecture": {
+        "chapter_thesis": "You do not get better disagreement by asking people to be brave; you get it by building norms that make truth-seeking safer than ego-protection.",
+        "why_pivotal": "This is where the book's social model becomes operational. CUDOS turns vague openness into concrete rules.",
+        "deeper_interpretation": "The chapter is about designing an anti-flattery environment. A group that only comforts you will make your decisions worse while feeling supportive.",
+        "rival_reading": "Some teams can weaponize dissent and become performatively adversarial. The safeguard is that dissent must be tied to evidence, calibration, and shared goals.",
+        "questions_to_carry": [
+          "Does this group reward accuracy more than status?",
+          "Can low-status people challenge high-status people here?",
+          "Are we sharing information, or hoarding evidence that helps our own side?"
+        ]
+      },
+      "vocabulary": {
+        "Must know": [
+          "dissent, noun or verb, 异议；提出异议. Disagreement that can improve group judgment.",
+          "skepticism, noun, 怀疑精神. Not cynicism, but disciplined demand for evidence.",
+          "disinterestedness, noun, 无私利性；超越私利. A norm of resisting personal incentives in judgment.",
+          "universalism, noun, 普遍性. Judging claims by evidence rather than by who says them."
+        ],
+        "Useful / high-value": [
+          "adversarial, adjective, 对抗性的. Useful when disagreement becomes structured opposition.",
+          "empirical, adjective, 经验的，基于证据的. Central to science-like decision culture.",
+          "integrity, noun, 正直；完整性. Here it means preserving trust in the reasoning process.",
+          "reticent, adjective, 沉默寡言的，不愿开口的. Useful for people who hesitate to speak in groups."
+        ],
+        "Specialized or context-bound": [
+          "CUDOS, acronym, 默顿科学规范的缩写. Communism, universalism, disinterestedness, organized skepticism.",
+          "Mertonian, adjective, 默顿式的. Related to sociologist Robert K. Merton's ideas.",
+          "organized skepticism, noun phrase, 有组织的怀疑. A group norm for testing claims carefully."
+        ]
+      },
+      "recap": {
+        "zh": "第五章的重点是：想赢得更好的判断，就要保护高质量异议。好小组不是没有冲突，而是让冲突服务于准确性。",
+        "en": "Disciplined dissent helps groups win by making evidence stronger than ego."
+      }
+    },
+    {
+      "english_label": "Chapter 6: Adventures in Mental Time Travel",
+      "key_chapter": true,
+      "listening_brief": {
+        "names": "Marty McFly, Doc Brown, Jerry Seinfeld, Ulysses, premortem, backcasting, tilt.",
+        "points": [
+          "听 mental time travel：让未来的自己参与现在的决策。",
+          "注意 regret 可以被提前使用，而不是事后折磨自己。",
+          "抓住 Ulysses contracts, backcasting, premortems 这些实用工具。",
+          "The final chapter turns the book from diagnosis into decision practice."
+        ],
+        "context": "第六章是工具箱。前面几章讲为什么人会误判，这一章讲怎样通过时间视角和预先承诺，减少当下情绪对未来的伤害。"
+      },
+      "companion": {
+        "zh": "最后一章把全书落到行动。所谓心理时间旅行，不是幻想未来，而是让你在决策前同时请三个人进场：过去的自己、现在的自己、未来的自己。过去的自己提供模式，未来的自己提供后悔和代价，现在的自己负责下注。\n\n本章最实用的工具包括：把后悔提前，问自己将来会怎样评价现在；用 Ulysses contract 预先限制未来冲动；用 backcasting 从理想结果倒推路径；用 premortem 假设失败已经发生，再倒推原因。它们共同对抗一个问题：当下情绪太响，未来后果太轻。",
+        "en": "Chapter 6 gives practical tools: move regret before the decision, precommit against future weakness, backcast from success, and premortem from failure. It is the book's operating manual.",
+        "priority": "Read very closely. This is the chapter to convert into a personal checklist."
+      },
+      "mini_lecture": {
+        "chapter_thesis": "Better decisions come from changing the time horizon before emotion narrows it.",
+        "why_pivotal": "The book ends by turning concepts into repeatable practices: precommitment, scenario planning, backcasting, and premortems.",
+        "deeper_interpretation": "The chapter understands that the enemy is not ignorance alone. It is the instability of the self across time: night self, morning self, winning self, losing self, angry self.",
+        "rival_reading": "A skeptic might find the tool list too management-friendly. The deeper value is not any single tool, but the habit of making future consequences vivid before choosing.",
+        "questions_to_carry": [
+          "What would future me wish I had considered now?",
+          "How could this plan fail even if I feel confident today?",
+          "What precommitment would protect me when emotion arrives?"
+        ]
+      },
+      "vocabulary": {
+        "Must know": [
+          "premortem, noun, 事前验尸；失败预演. Imagine the project failed, then identify likely causes before acting.",
+          "backcasting, noun, 反向回顾. Start from a desired future and work backward to today.",
+          "precommitment, noun, 预先承诺. A constraint set now to protect future behavior.",
+          "regret, noun or verb, 后悔. Duke wants you to use anticipated regret before the decision."
+        ],
+        "Useful / high-value": [
+          "contingency, noun, 应急方案；偶然情况. Useful for planning uncertain futures.",
+          "mitigate, verb, 减轻，缓解. Often used for reducing risk or harm.",
+          "rationale, noun, 理由，逻辑依据. The reasoning behind a decision.",
+          "imminent, adjective, 即将发生的. Useful when pressure feels near."
+        ],
+        "Specialized or context-bound": [
+          "tilt, noun, 情绪失控后的糟糕决策状态. Poker slang for letting emotion distort play.",
+          "Ulysses contract, noun phrase, 尤利西斯合约. A precommitment named after Ulysses tying himself to the mast.",
+          "scenario planning, noun phrase, 情景规划. Mapping multiple possible futures instead of one forecast."
+        ]
+      },
+      "recap": {
+        "zh": "第六章把全书变成工具：让未来提前参与现在，用预先承诺、反向回顾和失败预演，保护自己不被短期情绪牵着走。",
+        "en": "The final chapter teaches mental time travel: make future consequences vivid before present emotion takes over."
+      }
+    }
+  ]
+}

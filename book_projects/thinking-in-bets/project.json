@@ -1,0 +1,108 @@
+{
+  "slug": "thinking-in-bets",
+  "title": "Thinking in Bets / 对赌 - Customized Bilingual Companion Edition",
+  "author": "Annie Duke",
+  "language": "en",
+  "description": "Customized bilingual Thinking in Bets EPUB with chapter briefs, companion notes, vocabulary support, and source Chinese translation.",
+  "sources": {
+    "english": "books/Thinking in bets/Thinking in Bets Making Smarter Decisions When You Dont Have All the Facts (Annie Duke) (Z-Library).epub",
+    "chinese": "books/Thinking in bets/对赌信息不足时如何做出高明决策(帮助你在面对不确定未来时,建立科学决策系统,做对人生关键选择) (安妮·杜克) (z-library.sk, 1lib.sk, z-lib.sk).epub"
+  },
+  "output": {
+    "epub": "output/Thinking in Bets/Thinking in Bets - Customized Bilingual Companion.epub",
+    "pairing_map": "output/Thinking in Bets/pairing-map.md"
+  },
+  "pairings": [
+    {
+      "english_label": "Introduction: Why This Isn't a Poker Book",
+      "english_href": "OEBPS/xhtml/06_INTRODUCTION_Why_This.xhtml",
+      "chinese_label": "前言 为什么这不是一本关于打扑克的书",
+      "chinese_href": "OEBPS/text00004.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 1: Life Is Poker, Not Chess",
+      "english_href": "OEBPS/xhtml/07_CHAPTER_1_Life_Is_Pok.xhtml",
+      "chinese_label": "第一章 生活是扑克，不是象棋",
+      "chinese_href": "OEBPS/text00005.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 2: Wanna Bet?",
+      "english_href": "OEBPS/xhtml/08_CHAPTER_2_Wanna_Bet_.xhtml",
+      "chinese_label": "第二章 赌一把？",
+      "chinese_href": "OEBPS/text00006.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 3: Bet to Learn: Fielding the Unfolding Future",
+      "english_href": "OEBPS/xhtml/09_CHAPTER_3_Bet_to_Lear.xhtml",
+      "chinese_label": "第三章 在对赌中学习：应对不确定的未来",
+      "chinese_href": "OEBPS/text00007.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 4: The Buddy System",
+      "english_href": "OEBPS/xhtml/10_CHAPTER_4_The_Buddy_S.xhtml",
+      "chinese_label": "第四章 结伴制",
+      "chinese_href": "OEBPS/text00008.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 5: Dissent to Win",
+      "english_href": "OEBPS/xhtml/11_CHAPTER_5_Dissent_to_.xhtml",
+      "chinese_label": "第五章 为了更好地决策而提出异议",
+      "chinese_href": "OEBPS/text00009.html",
+      "status": "matched"
+    },
+    {
+      "english_label": "Chapter 6: Adventures in Mental Time Travel",
+      "english_href": "OEBPS/xhtml/12_CHAPTER_6_Adventures_.xhtml",
+      "chinese_label": "第六章 心理时间旅行历险",
+      "chinese_href": "OEBPS/text00010.html",
+      "status": "matched"
+    }
+  ],
+  "optional_sections": [
+    {
+      "title": "Chinese Edition Foreword",
+      "source": "Chinese edition frontmatter",
+      "href": "OEBPS/text00003.html",
+      "action": "visual-only",
+      "language": "zh",
+      "intro": "This publisher-added Chinese foreword is useful context for visual review, but it is not part of Annie Duke's main book and can be skipped during listening."
+    },
+    {
+      "title": "Acknowledgments",
+      "source": "English and Chinese editions",
+      "href": "OEBPS/xhtml/13_ACKNOWLEDGMENTS.xhtml",
+      "action": "visual-only",
+      "language": "en",
+      "intro": "Acknowledgments are preserved as a source note but are omitted from the main listening flow."
+    },
+    {
+      "title": "Notes",
+      "source": "English and Chinese editions",
+      "href": "OEBPS/xhtml/14_NOTES.xhtml",
+      "action": "visual-only",
+      "language": "en",
+      "intro": "The source notes are long and reference-heavy, so they are treated as optional visual material rather than read-aloud content."
+    },
+    {
+      "title": "Selected Bibliography and Further Reading",
+      "source": "English edition",
+      "href": "OEBPS/xhtml/15_SELECTED_BIBLIOGRAPHY.xhtml",
+      "action": "visual-only",
+      "language": "en",
+      "intro": "The bibliography is kept out of the listening flow to avoid long citation lists."
+    },
+    {
+      "title": "Index",
+      "source": "English edition",
+      "href": "OEBPS/xhtml/16_INDEX.xhtml",
+      "action": "omit",
+      "language": "en",
+      "intro": "The print index is not useful for read-aloud study and is omitted."
+    }
+  ]
+}
