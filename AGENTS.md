@@ -42,6 +42,8 @@ The default chapter order is Chinese first, English second. Vocabulary goes imme
 The output should feel like a thoughtful bilingual reading tutor that is pleasant to hear aloud. It should reduce friction, preserve the original book, and avoid burying the source text under low-value notes.
 For serious reading support, default to a teacher-level voice: sharper interpretation, stronger ideas, selective rival views, and questions that help the user think with and against the book.
 
+"Teacher-level" is enforced concretely, not aspirationally. Every interpretive claim must pass the Depth Tests. No banned generic moves survive into the final draft. The draft does not ship until the Sharper Critic Pass converges. These are gates, not encouragements.
+
 ## Core Workflow
 
 Follow this workflow for every target book:
@@ -56,8 +58,9 @@ Follow this workflow for every target book:
 8. For each chapter, create both a concise listening brief and deeper bilingual companion notes before the Chinese chapter.
 9. For each English chapter, create a learning-priority vocabulary list before the English chapter.
 10. Add a short chapter recap after the English chapter when useful for retention.
-11. Assemble the bilingual EPUB with a usable table of contents.
-12. Run the quality checklist before finishing.
+11. Run the Sharper Critic Pass on every interpretive claim before assembly. See the Sharper Critic Pass section.
+12. Assemble the bilingual EPUB with a usable table of contents.
+13. Run the quality checklist before finishing.
 
 ## Reusable Framework Workflow
 
@@ -67,8 +70,9 @@ For each book:
 
 1. Create or update `book_projects/<slug>/project.json` with source EPUB paths, output paths, pairings, and optional source-section decisions.
 2. Create or update `book_projects/<slug>/companion.json` with book companion notes, chapter listening briefs, chapter companion references, vocabulary, recaps, and pronunciation help.
-3. Run `PYTHONPATH=scripts python3 scripts/build_custom_epub.py book_projects/<slug>`.
-4. Verify the generated EPUB and pairing map under `output/<Book Name>/`.
+3. Run the Sharper Critic Pass on `companion.json` before building. See the Sharper Critic Pass section.
+4. Run `PYTHONPATH=scripts python3 scripts/build_custom_epub.py book_projects/<slug>`.
+5. Verify the generated EPUB and pairing map under `output/<Book Name>/`.
 
 The main listening EPUB should contain only book-relevant learning content and source text. Pairing maps, references, edition notes, and provenance details belong in sidecar artifacts or final reports, not in the listening flow.
 
@@ -138,6 +142,8 @@ Outside research is recommended by default for the book-level companion, especia
 
 Do not expose raw web URLs in listener-facing text. Use labels such as `publisher page`, `author interview`, `New York Times review`, or `official documentation`. Raw URLs may exist only as hidden hyperlink targets or in a clearly marked optional visual-only reference section.
 
+Every claim inside `companion_zh`, `summary_en`, and every field under `teacher_mode` must pass the Depth Tests. Apply the per-field standards listed in that section.
+
 ## Chapter Companion Standards
 
 Each chapter begins with a concise listening brief and then deeper companion notes before the Chinese chapter.
@@ -163,6 +169,77 @@ For key chapters, add a compact mini lecture. A key chapter is either a turning 
 Do not add source-edition descriptions or provenance text such as `English source text from ...` or `Chinese source text from ...` inside the chapter flow unless the user explicitly asks for an audit/study edition.
 
 Mark long background explanations, detailed source notes, and dense references as optional or visual-reference material when they would interrupt listening flow.
+
+Every claim inside `listening_brief.points`, `companion.zh`, `companion.en`, and every field under `mini_lecture` must pass the Depth Tests. Apply the per-field standards listed in that section.
+
+## Depth Tests
+
+Every interpretive claim — in the book-level companion, in any `teacher_mode` field, in any `mini_lecture` field, in `listening_brief.points`, in `companion.zh` body, in `recap` — must pass these five tests. If a claim fails any test, anchor it or cut it.
+
+1. **Anchor test.** The claim names at least one specific scene, phrase, sentence, song, repetition, or pattern from this particular book. Bare abstractions ("political language", "moral consciousness", "the politics of memory") fail until you say *which* phrase, *which* scene, *which* repetition. If the same sentence could appear unchanged in a companion for 1984, Darkness at Noon, or any other allegory, it has no anchor.
+
+2. **Stakes test.** The claim commits to something a serious critic could disagree with. If you can swap the claim for its plausible opposite and it still sounds reasonable as criticism, the claim is too soft. A `strong_interpretation` no working critic would push back on is not a strong interpretation; it is a paraphrase of the consensus.
+
+3. **Non-obvious test.** A reader who has read two reviews of this book should still learn something here. Consensus criticism ("Orwell shows how power corrupts", "this book is about totalitarianism") does not earn its space.
+
+4. **Compression test.** The claim can be paraphrased in one tight sentence without losing what is load-bearing. If you cannot compress it, it is fog dressed as depth.
+
+5. **Removable-sentence test.** Cut any sentence. If the reader loses nothing measurable — no new image, no new claim, no new question they could not have asked before — cut it.
+
+### Banned generic moves
+
+These patterns produce filler. Refuse them when drafting; cut them when reviewing.
+
+- **Abstract noun without textual instance.** Replace "the politics of memory" with the specific phrase, song, or commandment being remembered, edited, or banned. Replace "moral language" with the specific words the book actually fights over.
+- **Rival reading the author would endorse.** A rival reading must be a reading the original author would *resist*. "也可以从怀旧角度读" / "it can also be read as..." is almost always a hedge, not a rival. Test: would the author push back? If no, it is not a rival reading. Real rival readings make a different claim about what the book is doing — not the same claim in softer vocabulary.
+- **Question answerable without the book.** "Why are loyal people politically unsafe?" is a political-theory question. "Boxer says 'I will work harder' — at which appearance does the phrase stop belonging to him?" is a question this book answers. If an educated reader who has not opened the book can attempt the question, sharpen it.
+- **Listening point that names a theme.** "Listen for how the revolution begins" is a summary instruction. "Listen for the first phrase Squealer repeats verbatim — that repetition is the moment language stops belonging to the animals" names a moment. Each `listening_brief.points` entry should point at a specific phrase, scene, or repetition.
+- **"Why this matters" as gravity, not stakes.** "It teaches us how power works" is true of every political book. State the specific thing *this* book can teach that another cannot.
+- **Chapter thesis = plot paraphrase.** A `chapter_thesis` states what this chapter does *to the book*, not what happens *inside* the chapter. "Establishes the founding ideology" is summary. "Plants the four phrases the next nine chapters will fight over" is a thesis.
+- **Blind spots as boilerplate.** "Allegory compresses complexity" is true of every allegory. Name what *this* book misses that a *specific* alternative text or tradition gets right, and why the omission matters.
+
+### Per-field standards
+
+- `central_thesis`: one sentence; the strongest claim about the book this companion commits to. Must pass anchor + stakes.
+- `strong_interpretation`: the reading you would defend in a graduate seminar against the standard reading. Must pass stakes — someone serious would argue back.
+- `blind_spots`: must name something this book misses that a *specific* alternative tradition or text gets right. No generic "allegory compresses complexity."
+- `rival_reading`: a reading the author would resist. Test: would the author push back? If no, it is not a rival.
+- `chapter_thesis`: what the chapter does to the book, not what happens inside it.
+- `why_pivotal`: must specify which later moment loses meaning if the reader does not hear this one.
+- `deeper_interpretation`: must anchor at least one specific moment, line, or repetition. No claim that is only a general thesis floating above the chapter.
+- `questions_to_carry`: each question must be one the text answers, refuses to answer, or makes harder. A reader who has not opened the book cannot attempt it.
+- `what_to_watch` / `listening_brief.points`: each entry names a specific phrase, scene, repetition, or pattern to notice — not a theme to track.
+
+## Sharper Critic Pass
+
+This pass is mandatory before EPUB assembly. It is the discipline that makes the Depth Tests bite.
+
+Procedure:
+
+1. Re-read every interpretive claim in the draft `companion.json` as if you were a literary or political critic who has taught this book for twenty years. Cover: book-level `companion_zh`, `summary_en`, every field under `teacher_mode`, every field under each chapter's `mini_lecture`, every `listening_brief.points` entry, every `companion.zh` and `companion.en` body, every `recap`.
+
+2. For each claim, run the five Depth Tests. Mark every failure with the named test it fails. Be specific: not "this is weak", but "this fails the anchor test — no scene named" or "this fails the stakes test — Orwell would agree".
+
+3. For each marked failure, choose one:
+   - **Anchor.** Add the specific phrase, scene, line, or repetition the claim hangs on.
+   - **Sharpen.** Rewrite to a load-bearing claim that earns its space — something a serious critic would have to argue against.
+   - **Cut.** If the claim cannot be anchored or sharpened without rewriting it into a different claim, delete the sentence.
+
+4. After revising, re-read the draft as the critic. Ask: would another serious reader of this book read this revision and think "yes, but you didn't earn that"? If yes, anchor harder or cut.
+
+5. Iterate. The draft does not ship until two conditions hold simultaneously:
+   - A pass produces fewer cuts than the previous pass (the draft is converging).
+   - At least one rival reading in the book-level `teacher_mode` would make the author push back, not nod.
+
+Refuse to skip this pass. Refuse to declare convergence on the first pass. A first pass that produces no cuts means the pass was not honest, not that the draft was already sharp.
+
+Operating questions to use while running the pass:
+
+- Which sentences could I cut without losing anything a reader will notice? Cut those.
+- Which claims could appear unchanged in a companion for a different book by the same author? Anchor or cut.
+- Which "rival readings" would the author cheerfully endorse? Replace with a reading the author would resist.
+- Which questions could be asked by someone who has only read reviews of the book? Sharpen until the question requires the text.
+- Which interpretations sound like the consensus of educated readers? Either commit to a stronger claim or cut the sentence.
 
 ## Book-Type Adaptation
 
@@ -283,6 +360,10 @@ Before finishing, verify:
 - EPUB opens successfully.
 - Table of contents is usable.
 - Final response gives the output path and mentions unresolved alignment or source-quality issues.
+- Every interpretive claim — book-level companion, every `teacher_mode` field, every key-chapter `mini_lecture` field, every `listening_brief.points` entry, every `companion.zh` body — passes the five Depth Tests.
+- No banned generic moves remain in the final draft.
+- At least one rival reading in the book-level `teacher_mode` genuinely disagrees with the main interpretation; the author would push back on it, not nod.
+- The Sharper Critic Pass has been run, converged, and produced fewer cuts in its final iteration than its first.
 
 ## Final Response Requirements
 
